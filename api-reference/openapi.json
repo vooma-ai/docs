@@ -1,217 +1,2897 @@
 {
-  "openapi": "3.1.0",
-  "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
-    "version": "1.0.0"
-  },
-  "servers": [
-    {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
-    }
-  ],
-  "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "description": "Creates a new plant in the store",
-        "requestBody": {
-          "description": "Plant to add to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "webhooks": {
-    "/plant/webhook": {
-      "post": {
-        "description": "Information about a new plant added to the store",
-        "requestBody": {
-          "description": "Plant added to the store",
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewPlant"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Return a 200 status to indicate that the data was received successfully"
-          }
-        }
-      }
-    }
-  },
   "components": {
+    "examples": {},
+    "headers": {},
+    "parameters": {},
+    "requestBodies": {},
+    "responses": {},
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
+      "UserRole": {
+        "enum": [
+          "SYSTEM",
+          "ADMIN",
+          "SUPPORT",
+          "OPERATIONS",
+          "CUSTOMER",
+          "AI_WORKER"
         ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
+        "type": "string"
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
+      "ChangeRolePayload": {
+        "properties": {
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            },
+            "type": "array"
           },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
+          "username": {
+            "type": "string",
+            "nullable": true
+          },
+          "id": {
+            "type": "string"
           }
-        ]
+        },
+        "required": [
+          "roles",
+          "username",
+          "id"
+        ],
+        "type": "object"
+      },
+      "ChangeRoleInput": {
+        "properties": {
+          "roles": {
+            "items": {
+              "$ref": "#/components/schemas/UserRole"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "roles"
+        ],
+        "type": "object"
+      },
+      "ApiKeyPayload": {
+        "properties": {
+          "apiKey": {
+            "type": "string",
+            "description": "Make sure to store the key in a safe place.\nYou won't be able to see it again."
+          }
+        },
+        "required": [
+          "apiKey"
+        ],
+        "type": "object"
+      },
+      "GenerateApiKeyInput": {
+        "properties": {
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "type": "object"
+      },
+      "LoadTestType": {
+        "enum": [
+          "RANDOM_USERS",
+          "SPECIFIC_USERS"
+        ],
+        "type": "string"
+      },
+      "MessageSourceDistributionItem": {
+        "properties": {
+          "s3Url": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "s3Url",
+          "weight"
+        ],
+        "type": "object"
+      },
+      "LoadTestParams": {
+        "properties": {
+          "messageSourceDistribution": {
+            "items": {
+              "$ref": "#/components/schemas/MessageSourceDistributionItem"
+            },
+            "type": "array"
+          },
+          "userIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "userCount": {
+            "type": "number",
+            "format": "double"
+          },
+          "messagesPerUser": {
+            "type": "number",
+            "format": "double"
+          },
+          "loadTestType": {
+            "$ref": "#/components/schemas/LoadTestType"
+          }
+        },
+        "required": [
+          "messageSourceDistribution",
+          "messagesPerUser",
+          "loadTestType"
+        ],
+        "type": "object"
+      },
+      "HealthCheckResult": {
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "healthy",
+              "unhealthy"
+            ]
+          }
+        },
+        "required": [
+          "timestamp",
+          "status"
+        ],
+        "type": "object"
       },
       "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
-        "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
+          "name": {
+            "type": "string"
           },
           "message": {
             "type": "string"
+          },
+          "stack": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "message"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PredictionTerm": {
+        "properties": {
+          "value": {
+            "type": "string",
+            "description": "containing the text of the term."
+          },
+          "offset": {
+            "type": "number",
+            "format": "double",
+            "description": "start position of this term in the description, measured in Unicode characters."
+          }
+        },
+        "required": [
+          "value",
+          "offset"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PlaceType1": {
+        "description": "Table 1: Types supported in place search and addition\n\nYou can use the following values in the types filter for place searches and when adding a place.",
+        "enum": [
+          "accounting",
+          "airport",
+          "amusement_park",
+          "aquarium",
+          "art_gallery",
+          "atm",
+          "bakery",
+          "bank",
+          "bar",
+          "beauty_salon",
+          "bicycle_store",
+          "book_store",
+          "bowling_alley",
+          "bus_station",
+          "cafe",
+          "campground",
+          "car_dealer",
+          "car_rental",
+          "car_repair",
+          "car_wash",
+          "casino",
+          "cemetery",
+          "church",
+          "city_hall",
+          "clothing_store",
+          "convenience_store",
+          "courthouse",
+          "dentist",
+          "department_store",
+          "doctor",
+          "drugstore",
+          "electrician",
+          "electronics_store",
+          "embassy",
+          "fire_station",
+          "florist",
+          "funeral_home",
+          "furniture_store",
+          "gas_station",
+          "gym",
+          "hair_care",
+          "hardware_store",
+          "hindu_temple",
+          "home_goods_store",
+          "hospital",
+          "insurance_agency",
+          "jewelry_store",
+          "laundry",
+          "lawyer",
+          "library",
+          "light_rail_station",
+          "liquor_store",
+          "local_government_office",
+          "locksmith",
+          "lodging",
+          "meal_delivery",
+          "meal_takeaway",
+          "mosque",
+          "movie_rental",
+          "movie_theater",
+          "moving_company",
+          "museum",
+          "night_club",
+          "painter",
+          "park",
+          "parking",
+          "pet_store",
+          "pharmacy",
+          "physiotherapist",
+          "plumber",
+          "police",
+          "post_office",
+          "real_estate_agency",
+          "restaurant",
+          "roofing_contractor",
+          "rv_park",
+          "school",
+          "secondary_school",
+          "shoe_store",
+          "shopping_mall",
+          "spa",
+          "stadium",
+          "storage",
+          "store",
+          "subway_station",
+          "supermarket",
+          "synagogue",
+          "taxi_stand",
+          "tourist_attraction",
+          "train_station",
+          "transit_station",
+          "travel_agency",
+          "university",
+          "veterinary_care",
+          "zoo"
+        ],
+        "type": "string"
+      },
+      "PlaceType2": {
+        "description": "Table 2: Additional types returned by the Places service\n\nThe following types may be returned in the results of a place search, in addition to the types in table 1 above.\nFor more details on these types, refer to [Address Types](https://developers.google.com/maps/documentation/geocoding/intro#Types)\nin Geocoding Responses.",
+        "enum": [
+          "administrative_area_level_1",
+          "administrative_area_level_2",
+          "administrative_area_level_3",
+          "administrative_area_level_4",
+          "administrative_area_level_5",
+          "archipelago",
+          "colloquial_area",
+          "continent",
+          "country",
+          "establishment",
+          "finance",
+          "floor",
+          "food",
+          "general_contractor",
+          "geocode",
+          "health",
+          "intersection",
+          "landmark",
+          "locality",
+          "natural_feature",
+          "neighborhood",
+          "place_of_worship",
+          "plus_code",
+          "point_of_interest",
+          "political",
+          "post_box",
+          "postal_code",
+          "postal_code_prefix",
+          "postal_code_suffix",
+          "postal_town",
+          "premise",
+          "room",
+          "route",
+          "street_address",
+          "street_number",
+          "sublocality",
+          "sublocality_level_1",
+          "sublocality_level_2",
+          "sublocality_level_3",
+          "sublocality_level_4",
+          "sublocality_level_5",
+          "subpremise",
+          "town_square"
+        ],
+        "type": "string"
+      },
+      "AddressType": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/PlaceType1"
+          },
+          {
+            "$ref": "#/components/schemas/PlaceType2"
+          }
+        ]
+      },
+      "PredictionSubstring": {
+        "properties": {
+          "offset": {
+            "type": "number",
+            "format": "double",
+            "description": "location of the entered term."
+          },
+          "length": {
+            "type": "number",
+            "format": "double",
+            "description": "length of the entered term."
+          }
+        },
+        "required": [
+          "offset",
+          "length"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "StructuredFormatting": {
+        "properties": {
+          "main_text": {
+            "type": "string",
+            "description": "contains the main text of a prediction, usually the name of the place."
+          },
+          "main_text_matched_substrings": {
+            "items": {
+              "$ref": "#/components/schemas/PredictionSubstring"
+            },
+            "type": "array",
+            "description": "contains an array with `offset` value and `length`. These describe the location of\nthe entered term in the prediction result text, so that the term can be highlighted if desired."
+          },
+          "secondary_text": {
+            "type": "string",
+            "description": "contains the secondary text of a prediction, usually the location of the place."
+          },
+          "secondary_text_matched_substrings": {
+            "items": {
+              "$ref": "#/components/schemas/PredictionSubstring"
+            },
+            "type": "array",
+            "description": "contains an array with `offset` value and `length`. These describe the location of\nthe entered term in the prediction result secondary text, so that the term can be highlighted if desired."
+          }
+        },
+        "required": [
+          "main_text",
+          "main_text_matched_substrings",
+          "secondary_text",
+          "secondary_text_matched_substrings"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PlaceAutocompleteResult": {
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "contains the human-readable name for the returned result.\nFor `establishment` results, this is usually the business name."
+          },
+          "distance_meters": {
+            "type": "number",
+            "format": "double",
+            "description": "contains an integer indicating the straight-line distance between the predicted place, and the specified origin point, in meters.\nThis field is only returned when the origin point is specified in the request.\nThis field is not returned in predictions of type route."
+          },
+          "place_id": {
+            "type": "string",
+            "description": "is a textual identifier that uniquely identifies a place.\nTo retrieve information about the place, pass this identifier in the `placeId` field of a Places API request."
+          },
+          "terms": {
+            "items": {
+              "$ref": "#/components/schemas/PredictionTerm"
+            },
+            "type": "array",
+            "description": "contains an array of terms identifying each section of the returned description\n(a section of the description is generally terminated with a comma)."
+          },
+          "types": {
+            "items": {
+              "$ref": "#/components/schemas/AddressType"
+            },
+            "type": "array",
+            "description": "contains an array of types that apply to this place.\nFor example: `[ \"political\", \"locality\" ]` or `[ \"establishment\", \"geocode\" ]`."
+          },
+          "matched_substrings": {
+            "items": {
+              "$ref": "#/components/schemas/PredictionSubstring"
+            },
+            "type": "array",
+            "description": "contains an array with `offset` value and `length`. These describe the location of\nthe entered term in the prediction result text, so that the term can be highlighted if desired."
+          },
+          "structured_formatting": {
+            "$ref": "#/components/schemas/StructuredFormatting",
+            "description": "contains details on the prediction."
+          }
+        },
+        "required": [
+          "description",
+          "place_id",
+          "terms",
+          "types",
+          "matched_substrings",
+          "structured_formatting"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Status": {
+        "enum": [
+          "OK",
+          "INVALID_REQUEST",
+          "MAX_WAYPOINTS_EXCEEDED",
+          "MAX_ROUTE_LENGTH_EXCEEDED",
+          "OVER_DAILY_LIMIT",
+          "OVER_QUERY_LIMIT",
+          "REQUEST_DENIED",
+          "UNKNOWN_ERROR",
+          "ZERO_RESULTS",
+          "NOT_FOUND"
+        ],
+        "type": "string"
+      },
+      "PlaceAutocompleteResponseData": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status",
+            "description": "contains metadata on the request. See Status Codes below."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "When the top-level status code is other than `OK`, this field contains more detailed information\nabout the reasons behind the given status code."
+          },
+          "html_attributions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "may contain a set of attributions about this listing which must be displayed to the user (some listings may not have attribution)."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "contains a token that can be used to return up to 20 additional results.\nA `next_page_token` will not be returned if there are no additional results to display.\nThe maximum number of results that can be returned is 60.\nThere is a short delay between when a `next_page_token` is issued, and when it will become valid."
+          },
+          "predictions": {
+            "items": {
+              "$ref": "#/components/schemas/PlaceAutocompleteResult"
+            },
+            "type": "array",
+            "description": "contains an array of places, with information about the place.\nSee [Place Autocomplete Results](https://developers.google.com/places/web-service/autocomplete#place_autocomplete_results)\nfor information about these results. The Places API returns up to 5 results."
+          }
+        },
+        "required": [
+          "status",
+          "error_message",
+          "predictions"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GeocodingAddressComponentType": {
+        "enum": [
+          "floor",
+          "establishment",
+          "point_of_interest",
+          "parking",
+          "post_box",
+          "postal_town",
+          "room",
+          "street_number",
+          "bus_station",
+          "train_station",
+          "transit_station"
+        ],
+        "type": "string"
+      },
+      "AddressComponent": {
+        "properties": {
+          "types": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/AddressType"
+                },
+                {
+                  "$ref": "#/components/schemas/GeocodingAddressComponentType"
+                }
+              ]
+            },
+            "type": "array",
+            "description": "is an array indicating the *type* of the address component."
+          },
+          "long_name": {
+            "type": "string",
+            "description": "is the full text description or name of the address component as returned by the Geocoder."
+          },
+          "short_name": {
+            "type": "string",
+            "description": "is an abbreviated textual name for the address component, if available.\nFor example, an address component for the state of Alaska may have a `long_name` of \"Alaska\" and a `short_name` of \"AK\"\nusing the 2-letter postal abbreviation."
+          }
+        },
+        "required": [
+          "types",
+          "long_name",
+          "short_name"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LatLngLiteral": {
+        "properties": {
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "lng": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "lat",
+          "lng"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "LocationType": {
+        "enum": [
+          "ROOFTOP",
+          "RANGE_INTERPOLATED",
+          "GEOMETRIC_CENTER",
+          "APPROXIMATE"
+        ],
+        "type": "string"
+      },
+      "LatLngBounds": {
+        "description": "The bounds parameter defines the latitude/longitude coordinates of the southwest and northeast corners of this bounding box.",
+        "properties": {
+          "northeast": {
+            "$ref": "#/components/schemas/LatLngLiteral"
+          },
+          "southwest": {
+            "$ref": "#/components/schemas/LatLngLiteral"
+          }
+        },
+        "required": [
+          "northeast",
+          "southwest"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "AddressGeometry": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LatLngLiteral",
+            "description": "contains the geocoded latitude, longitude value. For normal address lookups, this field is typically the most important."
+          },
+          "location_type": {
+            "$ref": "#/components/schemas/LocationType",
+            "description": "stores additional data about the specified location."
+          },
+          "viewport": {
+            "$ref": "#/components/schemas/LatLngBounds",
+            "description": "contains the recommended viewport for displaying the returned result, specified as two latitude, longitude values\ndefining the `southwest` and `northeast` corner of the viewport bounding box.\nGenerally the viewport is used to frame a result when displaying it to a user."
+          },
+          "bounds": {
+            "$ref": "#/components/schemas/LatLngBounds",
+            "description": "(optionally returned) stores the bounding box which can fully contain the returned result.\nNote that these bounds may not match the recommended viewport.\n(For example, San Francisco includes the [Farallon islands](https://en.wikipedia.org/wiki/Farallon_Islands),\nwhich are technically part of the city, but probably should not be returned in the viewport.)"
+          }
+        },
+        "required": [
+          "location",
+          "viewport"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "PlusCode": {
+        "properties": {
+          "global_code": {
+            "type": "string",
+            "description": "is a 4 character area code and 6 character or longer local code (849VCWC8+R9)."
+          },
+          "compound_code": {
+            "type": "string",
+            "description": "is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA)."
+          }
+        },
+        "required": [
+          "global_code",
+          "compound_code"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GeocodeResult": {
+        "properties": {
+          "types": {
+            "items": {
+              "$ref": "#/components/schemas/AddressType"
+            },
+            "type": "array",
+            "description": "array indicates the type of the returned result.\nThis array contains a set of zero or more tags identifying the type of feature returned in the result.\nFor example, a geocode of \"Chicago\" returns \"locality\" which indicates that \"Chicago\" is a city,\nand also returns \"political\" which indicates it is a political entity."
+          },
+          "formatted_address": {
+            "type": "string",
+            "description": "is a string containing the human-readable address of this location.\n\nOften this address is equivalent to the postal address. Note that some countries, such as the United Kingdom,\ndo not allow distribution of true postal addresses due to licensing restrictions.\n\nThe formatted address is logically composed of one or more address components.\nFor example, the address \"111 8th Avenue, New York, NY\" consists of the following components: \"111\" (the street number),\n\"8th Avenue\" (the route), \"New York\" (the city) and \"NY\" (the US state).\n\nDo not parse the formatted address programmatically. Instead you should use the individual address components,\nwhich the API response includes in addition to the formatted address field."
+          },
+          "address_components": {
+            "items": {
+              "$ref": "#/components/schemas/AddressComponent"
+            },
+            "type": "array",
+            "description": "is an array containing the separate components applicable to this address.\n\nNote the following facts about the `address_components[]` array:\n - The array of address components may contain more components than the `formatted_address`.\n - The array does not necessarily include all the political entities that contain an address,\n   apart from those included in the `formatted_address`. To retrieve all the political entities that contain a specific address,\n   you should use reverse geocoding, passing the latitude/longitude of the address as a parameter to the request.\n - The format of the response is not guaranteed to remain the same between requests.\n   In particular, the number of `address_components` varies based on the address requested and can change\n   over time for the same address. A component can change position in the array.\n   The type of the component can change. A particular component may be missing in a later response."
+          },
+          "postcode_localities": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "is an array denoting all the localities contained in a postal code.\nThis is only present when the result is a postal code that contains multiple localities."
+          },
+          "geometry": {
+            "$ref": "#/components/schemas/AddressGeometry",
+            "description": "address geometry."
+          },
+          "plus_code": {
+            "$ref": "#/components/schemas/PlusCode",
+            "description": "is an encoded location reference, derived from latitude and longitude coordinates,\nthat represents an area: 1/8000th of a degree by 1/8000th of a degree (about 14m x 14m at the equator) or smaller.\nPlus codes can be used as a replacement for street addresses in places where they do not exist\n(where buildings are not numbered or streets are not named).\n\nThe plus code is formatted as a global code and a compound code:\n - `global_code` is a 4 character area code and 6 character or longer local code (849VCWC8+R9).\n - `compound_code` is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA).\nTypically, both the global code and compound code are returned. However, if the result is in a remote location\n(for example, an ocean or desert) only the global code may be returned."
+          },
+          "partial_match": {
+            "type": "boolean",
+            "description": "indicates that the geocoder did not return an exact match for the original request,\nthough it was able to match part of the requested address.\nYou may wish to examine the original request for misspellings and/or an incomplete address.\n\nPartial matches most often occur for street addresses that do not exist within the locality you pass in the request.\nPartial matches may also be returned when a request matches two or more locations in the same locality.\nFor example, \"21 Henr St, Bristol, UK\" will return a partial match for both Henry Street and Henrietta Street.\nNote that if a request includes a misspelled address component, the geocoding service may suggest an alternative address.\nSuggestions triggered in this way will also be marked as a partial match."
+          },
+          "place_id": {
+            "type": "string",
+            "description": "is a unique identifier that can be used with other Google APIs."
+          }
+        },
+        "required": [
+          "types",
+          "formatted_address",
+          "address_components",
+          "postcode_localities",
+          "geometry",
+          "plus_code",
+          "partial_match",
+          "place_id"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "GeocodeResponseData": {
+        "properties": {
+          "status": {
+            "$ref": "#/components/schemas/Status",
+            "description": "contains metadata on the request. See Status Codes below."
+          },
+          "error_message": {
+            "type": "string",
+            "description": "When the top-level status code is other than `OK`, this field contains more detailed information\nabout the reasons behind the given status code."
+          },
+          "html_attributions": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array",
+            "description": "may contain a set of attributions about this listing which must be displayed to the user (some listings may not have attribution)."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "contains a token that can be used to return up to 20 additional results.\nA `next_page_token` will not be returned if there are no additional results to display.\nThe maximum number of results that can be returned is 60.\nThere is a short delay between when a `next_page_token` is issued, and when it will become valid."
+          },
+          "results": {
+            "items": {
+              "$ref": "#/components/schemas/GeocodeResult"
+            },
+            "type": "array",
+            "description": "contains an array of geocoded address information and geometry information.\n\nGenerally, only one entry in the `\"results\"` array is returned for address lookups,though the geocoder may return several results\nwhen address queries are ambiguous."
+          }
+        },
+        "required": [
+          "status",
+          "error_message",
+          "results"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "QuoteStatus": {
+        "enum": [
+          "NEW",
+          "QUOTED",
+          "WON",
+          "LOST"
+        ],
+        "type": "string"
+      },
+      "FreightMode": {
+        "enum": [
+          "TRUCKLOAD",
+          "LTL",
+          "PARTIAL_TRUCKLOAD",
+          "INTERMODAL",
+          "DRAYAGE"
+        ],
+        "type": "string"
+      },
+      "DrayageSubtype": {
+        "enum": [
+          "IMPORT",
+          "EXPORT"
+        ],
+        "type": "string"
+      },
+      "FreightModeDetails": {
+        "properties": {
+          "drayageSubtype": {
+            "$ref": "#/components/schemas/DrayageSubtype"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/FreightMode"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      },
+      "MileageUnits": {
+        "enum": [
+          "MI",
+          "KM"
+        ],
+        "type": "string"
+      },
+      "Mileage": {
+        "properties": {
+          "uom": {
+            "$ref": "#/components/schemas/MileageUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "uom",
+          "value"
+        ],
+        "type": "object"
+      },
+      "StopType": {
+        "enum": [
+          "PICKUP",
+          "DELIVERY"
+        ],
+        "type": "string"
+      },
+      "Address": {
+        "properties": {
+          "country": {
+            "type": "string"
+          },
+          "postalCode": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "addressTwo": {
+            "type": "string"
+          },
+          "addressOne": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "LocationExternalIdentifierType": {
+        "enum": [
+          "CUSTOM",
+          "GOOGLE_PLACES",
+          "TURVO"
+        ],
+        "type": "string"
+      },
+      "LocationExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LocationExternalIdentifierType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the LocationExternalIdentifierType enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Location": {
+        "properties": {
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/LocationExternalIdentifier"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "address": {
+            "$ref": "#/components/schemas/Address"
+          }
+        },
+        "required": [
+          "externalIds",
+          "address"
+        ],
+        "type": "object"
+      },
+      "DateTimeRange": {
+        "properties": {
+          "startDate": {
+            "type": "string",
+            "description": "Start UTC date in YYYY-MM-DD format"
+          },
+          "endDate": {
+            "type": "string",
+            "description": "Optional end UTC date in YYYY-MM-DD format"
+          },
+          "startTime": {
+            "type": "string",
+            "description": "Optional start UTC time in HH:mm:ss format"
+          },
+          "endTime": {
+            "type": "string",
+            "description": "Optional end UTC time in HH:mm:ss format"
+          },
+          "timezone": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "startDate"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Stop": {
+        "properties": {
+          "notes": {
+            "type": "string"
+          },
+          "dateTimeRange": {
+            "$ref": "#/components/schemas/DateTimeRange"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StopType"
+          }
+        },
+        "required": [
+          "location",
+          "type"
+        ],
+        "type": "object"
+      },
+      "Route": {
+        "properties": {
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/Stop"
+            },
+            "type": "array"
+          },
+          "mileage": {
+            "$ref": "#/components/schemas/Mileage"
+          }
+        },
+        "required": [
+          "stops"
+        ],
+        "type": "object"
+      },
+      "CustomerExternalIdentifierType": {
+        "enum": [
+          "CUSTOM",
+          "TURVO"
+        ],
+        "type": "string"
+      },
+      "CustomerExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/CustomerExternalIdentifierType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the CustomerExternalIdentifierType enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Customer": {
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerExternalIdentifier"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "externalIds",
+          "id"
+        ],
+        "type": "object"
+      },
+      "EquipmentType": {
+        "enum": [
+          "BOX_TRUCK",
+          "CARGO_VAN",
+          "CONESTOGA",
+          "CONTAINER",
+          "DOUBLE_DROP",
+          "DRY_VAN",
+          "FLATBED",
+          "HOT_SHOT",
+          "LOW_BOY",
+          "POWER_ONLY",
+          "REEFER",
+          "REMOVABLE_GOOSENECK",
+          "SPRINTER_VAN",
+          "STEP_DECK",
+          "STRAIGHT_TRUCK",
+          "AUTO_CARRIER",
+          "OTHER"
+        ],
+        "type": "string"
+      },
+      "Equipment": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/EquipmentType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the EquipmentType enum values but subject to change"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Commodity": {
+        "properties": {
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ],
+        "type": "object"
+      },
+      "WeightUnits": {
+        "enum": [
+          "LB",
+          "KG"
+        ],
+        "type": "string"
+      },
+      "Weight": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/WeightUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units",
+          "value"
+        ],
+        "type": "object"
+      },
+      "FreightOrder": {
+        "properties": {
+          "totalWeight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "commodities": {
+            "items": {
+              "$ref": "#/components/schemas/Commodity"
+            },
+            "type": "array"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "route": {
+            "$ref": "#/components/schemas/Route"
+          },
+          "freightModeDetails": {
+            "$ref": "#/components/schemas/FreightModeDetails"
+          }
+        },
+        "required": [
+          "commodities",
+          "equipment",
+          "customer",
+          "route",
+          "freightModeDetails"
+        ],
+        "type": "object"
+      },
+      "RatingMethod": {
+        "enum": [
+          "CUSTOM",
+          "DAT",
+          "GREENSCREENS",
+          "BITFREIGHTER",
+          "TRANSFIX",
+          "MANUAL",
+          "DIRECT_OFFER"
+        ],
+        "type": "string"
+      },
+      "CurrencyUnits": {
+        "enum": [
+          "USD",
+          "CAD"
+        ],
+        "type": "string"
+      },
+      "Amount": {
+        "properties": {
+          "uom": {
+            "$ref": "#/components/schemas/CurrencyUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "uom",
+          "value"
+        ],
+        "type": "object"
+      },
+      "RateExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RatingMethod"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the RatingMethod enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "RateComponentType": {
+        "enum": [
+          "LINE_HAUL",
+          "FUEL_SURCHARGE",
+          "MANUAL_ADJUSTMENT",
+          "MARGIN",
+          "TMS_ADJUSTMENT",
+          "MESSAGE_ADJUSTMENT",
+          "TOTAL",
+          "OTHER"
+        ],
+        "type": "string"
+      },
+      "RateComponent": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "type": {
+            "$ref": "#/components/schemas/RateComponentType"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "amount",
+          "type",
+          "description"
+        ],
+        "type": "object"
+      },
+      "Rate": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "method": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/RatingMethod"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the RatingMethod enum values\nbut subject to change"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/RateExternalIdentifier"
+            },
+            "type": "array"
+          },
+          "components": {
+            "items": {
+              "$ref": "#/components/schemas/RateComponent"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "id",
+          "method",
+          "amount",
+          "externalIds",
+          "components"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "UserExternalIdentifierType": {
+        "enum": [
+          "CUSTOM",
+          "EMAIL",
+          "PHONE",
+          "VOOMA_USERNAME"
+        ],
+        "type": "string"
+      },
+      "UserExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/UserExternalIdentifierType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the UserExternalIdentifierType enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "User": {
+        "properties": {
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/UserExternalIdentifier"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "externalIds",
+          "id"
+        ],
+        "type": "object"
+      },
+      "QuoteTags": {
+        "properties": {
+          "isAuction": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "isAuction"
+        ],
+        "type": "object"
+      },
+      "QuoteAutomation": {
+        "properties": {
+          "requestedByUser": {
+            "type": "boolean",
+            "description": "True if the quote was requested by a user; it may have been\nrequested after being identified by Vooma"
+          },
+          "identifiedByVooma": {
+            "type": "boolean",
+            "description": "True if Vooma's AI identified the opportunity, whether it was\nidentified prior to user request or after"
+          }
+        },
+        "required": [
+          "requestedByUser",
+          "identifiedByVooma"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Quote": {
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/QuoteStatus"
+          },
+          "freightOrder": {
+            "$ref": "#/components/schemas/FreightOrder"
+          },
+          "carrierRate": {
+            "$ref": "#/components/schemas/Rate"
+          },
+          "customerRate": {
+            "$ref": "#/components/schemas/Rate"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "additionalUsers": {
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "type": "array",
+            "description": "Includes users who may have been cc'd or who owned matching quotes\ndeduplicated by Vooma"
+          },
+          "requestedByEmail": {
+            "type": "string"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/QuoteTags"
+          },
+          "responseTimeSeconds": {
+            "type": "number",
+            "format": "double",
+            "description": "Time in seconds between when the quote request was received\nand when first email response was sent from the user"
+          },
+          "automation": {
+            "$ref": "#/components/schemas/QuoteAutomation"
+          }
+        },
+        "required": [
+          "id",
+          "createdAt",
+          "updatedAt",
+          "status",
+          "freightOrder",
+          "additionalUsers",
+          "tags",
+          "automation"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.GetQuotesPayload": {
+        "properties": {
+          "quotes": {
+            "items": {
+              "$ref": "#/components/schemas/Quote"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "quotes"
+        ],
+        "type": "object"
+      },
+      "V0.PaginatedResponse": {
+        "properties": {
+          "pageInfo": {
+            "properties": {
+              "endCursor": {
+                "type": "string"
+              },
+              "startCursor": {
+                "type": "string"
+              },
+              "hasPreviousPage": {
+                "type": "boolean"
+              },
+              "hasNextPage": {
+                "type": "boolean"
+              }
+            },
+            "type": "object"
+          },
+          "totalCount": {
+            "type": "number",
+            "format": "double"
+          },
+          "count": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": "object"
+      },
+      "DateFilter": {
+        "properties": {
+          "end": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "start": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "type": "object"
+      },
+      "GeoCircle": {
+        "properties": {
+          "radiusMiles": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "radiusMiles",
+          "longitude",
+          "latitude"
+        ],
+        "type": "object"
+      },
+      "LaneFilter": {
+        "properties": {
+          "destination": {
+            "$ref": "#/components/schemas/GeoCircle"
+          },
+          "origin": {
+            "$ref": "#/components/schemas/GeoCircle"
+          }
+        },
+        "type": "object"
+      },
+      "AuctionType": {
+        "enum": [
+          "AUCTION",
+          "NON_AUCTION"
+        ],
+        "type": "string"
+      },
+      "Pagination": {
+        "properties": {
+          "limit": {
+            "type": "number",
+            "format": "double"
+          },
+          "after": {
+            "type": "string"
+          },
+          "before": {
+            "type": "string"
+          },
+          "last": {
+            "type": "number",
+            "format": "double"
+          },
+          "first": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "type": "object"
+      },
+      "OpportunityType": {
+        "enum": [
+          "CONFIRMED",
+          "UNCONFIRMED",
+          "ALL"
+        ],
+        "type": "string"
+      },
+      "V0.GetQuotesInput": {
+        "properties": {
+          "opportunityType": {
+            "$ref": "#/components/schemas/OpportunityType"
+          },
+          "pagination": {
+            "$ref": "#/components/schemas/Pagination"
+          },
+          "auctionTypes": {
+            "items": {
+              "$ref": "#/components/schemas/AuctionType"
+            },
+            "type": "array"
+          },
+          "freightModes": {
+            "items": {
+              "$ref": "#/components/schemas/FreightMode"
+            },
+            "type": "array"
+          },
+          "equipmentTypes": {
+            "items": {
+              "$ref": "#/components/schemas/EquipmentType"
+            },
+            "type": "array"
+          },
+          "laneFilter": {
+            "$ref": "#/components/schemas/LaneFilter"
+          },
+          "dateFilter": {
+            "$ref": "#/components/schemas/DateFilter"
+          },
+          "searchTerm": {
+            "type": "string"
+          },
+          "statuses": {
+            "items": {
+              "$ref": "#/components/schemas/QuoteStatus"
+            },
+            "type": "array"
+          },
+          "customerIds": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "type": "object"
+      },
+      "V0.GetQuotePayload": {
+        "properties": {
+          "quote": {
+            "$ref": "#/components/schemas/Quote"
+          }
+        },
+        "required": [
+          "quote"
+        ],
+        "type": "object"
+      },
+      "V0.CreateQuotePayload": {
+        "properties": {
+          "quote": {
+            "$ref": "#/components/schemas/Quote"
+          }
+        },
+        "required": [
+          "quote"
+        ],
+        "type": "object"
+      },
+      "Pick_Quote.Exclude_keyofQuote.id__": {
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "$ref": "#/components/schemas/QuoteStatus"
+          },
+          "freightOrder": {
+            "$ref": "#/components/schemas/FreightOrder"
+          },
+          "carrierRate": {
+            "$ref": "#/components/schemas/Rate"
+          },
+          "customerRate": {
+            "$ref": "#/components/schemas/Rate"
+          },
+          "user": {
+            "$ref": "#/components/schemas/User"
+          },
+          "additionalUsers": {
+            "items": {
+              "$ref": "#/components/schemas/User"
+            },
+            "type": "array",
+            "description": "Includes users who may have been cc'd or who owned matching quotes\ndeduplicated by Vooma"
+          },
+          "requestedByEmail": {
+            "type": "string"
+          },
+          "tags": {
+            "$ref": "#/components/schemas/QuoteTags"
+          },
+          "responseTimeSeconds": {
+            "type": "number",
+            "format": "double",
+            "description": "Time in seconds between when the quote request was received\nand when first email response was sent from the user"
+          },
+          "automation": {
+            "$ref": "#/components/schemas/QuoteAutomation"
+          }
+        },
+        "required": [
+          "createdAt",
+          "updatedAt",
+          "status",
+          "freightOrder",
+          "additionalUsers",
+          "tags",
+          "automation"
+        ],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
+      "Omit_Quote.id_": {
+        "$ref": "#/components/schemas/Pick_Quote.Exclude_keyofQuote.id__",
+        "description": "Construct a type with the properties of T except for those in type K."
+      },
+      "V0.CreateQuoteInput": {
+        "properties": {
+          "quote": {
+            "$ref": "#/components/schemas/Omit_Quote.id_"
+          }
+        },
+        "required": [
+          "quote"
+        ],
+        "type": "object"
+      },
+      "Pick_V0.FreightOrder.Exclude_keyofV0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails__": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "totalWeight": {
+            "$ref": "#/components/schemas/Weight"
+          }
+        },
+        "required": [
+          "customer"
+        ],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
+      "Omit_V0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails_": {
+        "$ref": "#/components/schemas/Pick_V0.FreightOrder.Exclude_keyofV0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails__",
+        "description": "Construct a type with the properties of T except for those in type K."
+      },
+      "V0.MileageUnits": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "StrategyLiveMileage": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/V0.MileageUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units",
+          "value"
+        ],
+        "type": "object"
+      },
+      "V0.Stop": {
+        "properties": {
+          "notes": {
+            "type": "string"
+          },
+          "dateTimeRange": {
+            "$ref": "#/components/schemas/DateTimeRange"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StopType"
+          }
+        },
+        "required": [
+          "location",
+          "type"
+        ],
+        "type": "object"
+      },
+      "V0.Contact": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "ReferenceType": {
+        "enum": [
+          "ORDER_REFERENCE",
+          "PURCHASE_ORDER",
+          "BILL_OF_LADING",
+          "INVOICE",
+          "SHIPMENT",
+          "SALES_ORDER",
+          "TRACKING",
+          "DELIVERY",
+          "CUSTOMER_REFERENCE",
+          "LOAD",
+          "CONTAINER",
+          "MASTER_BILL_OF_LADING",
+          "BOOKING",
+          "SEAL",
+          "PICKUP",
+          "APPOINTMENT",
+          "OTHER"
+        ],
+        "type": "string"
+      },
+      "V0.Reference": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReferenceType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the ReferenceType enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.ShippingUnit": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Contact": {
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "HazmatClassification": {
+        "properties": {
+          "qualifier": {
+            "type": "string"
+          },
+          "hazardClass": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "V0.Hazmat": {
+        "properties": {
+          "classifications": {
+            "items": {
+              "$ref": "#/components/schemas/HazmatClassification"
+            },
+            "type": "array"
+          },
+          "packingGroup": {
+            "type": "string"
+          },
+          "unNumber": {
+            "type": "string"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          }
+        },
+        "type": "object"
+      },
+      "V0.Weight": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/WeightUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units",
+          "value"
+        ],
+        "type": "object"
+      },
+      "DimensionUnits": {
+        "enum": [
+          "IN",
+          "CM",
+          "FT"
+        ],
+        "type": "string"
+      },
+      "Dimension": {
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "units": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DimensionUnits"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the DimensionUnits enum values but subject to change"
+          }
+        },
+        "required": [
+          "value",
+          "units"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.Dimensions": {
+        "properties": {
+          "height": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "width": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "length": {
+            "$ref": "#/components/schemas/Dimension"
+          }
+        },
+        "type": "object"
+      },
+      "StrategyLiveCommodity": {
+        "properties": {
+          "itemReference": {
+            "type": "string"
+          },
+          "dimensions": {
+            "$ref": "#/components/schemas/V0.Dimensions"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/V0.Weight"
+          },
+          "hazmat": {
+            "$ref": "#/components/schemas/V0.Hazmat"
+          },
+          "nmfcCode": {
+            "type": "string"
+          },
+          "freightClass": {
+            "type": "string"
+          },
+          "pieceUnits": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/V0.ShippingUnit"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "pieceQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "handlingUnits": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/V0.ShippingUnit"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "handlingQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ],
+        "type": "object"
+      },
+      "StrategyLiveStop": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/V0.Stop"
+          },
+          {
+            "properties": {
+              "commodities": {
+                "items": {
+                  "$ref": "#/components/schemas/StrategyLiveCommodity"
+                },
+                "type": "array"
+              },
+              "references": {
+                "items": {
+                  "$ref": "#/components/schemas/V0.Reference"
+                },
+                "type": "array"
+              },
+              "contact": {
+                "$ref": "#/components/schemas/V0.Contact"
+              },
+              "externalNotes": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "StrategyLiveRoute": {
+        "properties": {
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/StrategyLiveStop"
+            },
+            "type": "array"
+          },
+          "mileage": {
+            "$ref": "#/components/schemas/StrategyLiveMileage"
+          }
+        },
+        "required": [
+          "stops"
+        ],
+        "type": "object"
+      },
+      "V0.EquipmentType": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.Dimension": {
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "units": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DimensionUnits"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the DimensionUnits enum values but subject to change"
+          }
+        },
+        "required": [
+          "value",
+          "units"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TemperatureUnits": {
+        "enum": [
+          "F",
+          "C"
+        ],
+        "type": "string"
+      },
+      "V0.Temperature": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/TemperatureUnits"
+          },
+          "max": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units"
+        ],
+        "type": "object"
+      },
+      "StrategyLiveEquipment": {
+        "properties": {
+          "temperature": {
+            "$ref": "#/components/schemas/V0.Temperature"
+          },
+          "length": {
+            "$ref": "#/components/schemas/V0.Dimension"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/V0.EquipmentType"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "V0.FreightModeDetails": {
+        "properties": {
+          "drayageSubtype": {
+            "$ref": "#/components/schemas/DrayageSubtype"
+          },
+          "mode": {
+            "$ref": "#/components/schemas/FreightMode"
+          }
+        },
+        "required": [
+          "mode"
+        ],
+        "type": "object"
+      },
+      "V0.Accessorial": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.PaymentTerms": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "V0.CurrencyUnits": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "StrategyLiveAmount": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/V0.CurrencyUnits"
+          },
+          "value": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units",
+          "value"
+        ],
+        "type": "object"
+      },
+      "V0.LineItemType": {
+        "properties": {},
+        "type": "object",
+        "additionalProperties": false
+      },
+      "StrategyLiveLineItem": {
+        "properties": {
+          "amount": {
+            "$ref": "#/components/schemas/StrategyLiveAmount"
+          },
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/V0.LineItemType"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "amount",
+          "description"
+        ],
+        "type": "object"
+      },
+      "Record_string.string_": {
+        "properties": {},
+        "type": "object",
+        "description": "Construct a type with a set of properties K of type T"
+      },
+      "StrategyLiveFreightOrder": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Omit_V0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails_"
+          },
+          {
+            "properties": {
+              "attributes": {
+                "$ref": "#/components/schemas/Record_string.string_"
+              },
+              "lineItems": {
+                "items": {
+                  "$ref": "#/components/schemas/StrategyLiveLineItem"
+                },
+                "type": "array"
+              },
+              "cargoValue": {
+                "$ref": "#/components/schemas/StrategyLiveAmount"
+              },
+              "paymentTerms": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/V0.PaymentTerms"
+                  },
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "externalNotes": {
+                "type": "string"
+              },
+              "notes": {
+                "type": "string"
+              },
+              "accessorials": {
+                "items": {
+                  "anyOf": [
+                    {
+                      "$ref": "#/components/schemas/V0.Accessorial"
+                    },
+                    {
+                      "type": "string"
+                    }
+                  ]
+                },
+                "type": "array"
+              },
+              "freightMode": {
+                "$ref": "#/components/schemas/V0.FreightModeDetails"
+              },
+              "references": {
+                "items": {
+                  "$ref": "#/components/schemas/V0.Reference"
+                },
+                "type": "array"
+              },
+              "commodities": {
+                "items": {
+                  "$ref": "#/components/schemas/StrategyLiveCommodity"
+                },
+                "type": "array"
+              },
+              "equipment": {
+                "$ref": "#/components/schemas/StrategyLiveEquipment"
+              },
+              "route": {
+                "$ref": "#/components/schemas/StrategyLiveRoute"
+              }
+            },
+            "required": [
+              "commodities",
+              "equipment",
+              "route"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "V0.User": {
+        "properties": {
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/UserExternalIdentifier"
+            },
+            "type": "array"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "externalIds",
+          "id"
+        ],
+        "type": "object"
+      },
+      "StrategyLiveOrder": {
+        "properties": {
+          "region": {
+            "type": "string"
+          },
+          "office": {
+            "type": "string"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/V0.User"
+            },
+            "type": "array"
+          },
+          "freightOrder": {
+            "$ref": "#/components/schemas/StrategyLiveFreightOrder"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "freightOrder",
+          "updatedAt",
+          "createdAt",
+          "id"
+        ],
+        "type": "object"
+      },
+      "GetOrderPayload": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/StrategyLiveOrder"
+          }
+        },
+        "required": [
+          "order"
+        ],
+        "type": "object"
+      },
+      "CreateOrderPayload": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/StrategyLiveOrder"
+          }
+        },
+        "required": [
+          "order"
+        ],
+        "type": "object"
+      },
+      "Pick_StrategyLiveOrder.Exclude_keyofStrategyLiveOrder.id__": {
+        "properties": {
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "freightOrder": {
+            "$ref": "#/components/schemas/StrategyLiveFreightOrder"
+          },
+          "users": {
+            "items": {
+              "$ref": "#/components/schemas/V0.User"
+            },
+            "type": "array"
+          },
+          "office": {
+            "type": "string"
+          },
+          "region": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "createdAt",
+          "updatedAt",
+          "freightOrder"
+        ],
+        "type": "object",
+        "description": "From T, pick a set of properties whose keys are in the union K"
+      },
+      "Omit_StrategyLiveOrder.id_": {
+        "$ref": "#/components/schemas/Pick_StrategyLiveOrder.Exclude_keyofStrategyLiveOrder.id__",
+        "description": "Construct a type with the properties of T except for those in type K."
+      },
+      "CreateOrderInput": {
+        "$ref": "#/components/schemas/Omit_StrategyLiveOrder.id_"
+      },
+      "UpdateOrderPayload": {
+        "properties": {
+          "order": {
+            "$ref": "#/components/schemas/StrategyLiveOrder"
+          }
+        },
+        "required": [
+          "order"
+        ],
+        "type": "object"
+      },
+      "UpdateOrderInput": {
+        "$ref": "#/components/schemas/Omit_StrategyLiveOrder.id_"
+      },
+      "CancelOrderPayload": {
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "type": "object"
+      },
+      "AttachDocumentPayload": {
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "type": "object"
+      },
+      "AttachDocumentInput": {
+        "properties": {
+          "documentType": {
+            "type": "string"
+          },
+          "mimetype": {
+            "type": "string"
+          },
+          "filename": {
+            "type": "string"
+          },
+          "file": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "documentType",
+          "mimetype",
+          "filename",
+          "file"
+        ],
+        "type": "object"
+      },
+      "TurvoCreateOrUpdateLocationPayload": {
+        "properties": {
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "type": "object"
+      },
+      "TurvoLocationEventName": {
+        "type": "string",
+        "enum": [
+          "LOCATION_ADD",
+          "LOCATION_UPDATE"
+        ]
+      },
+      "TurvoLocationAddress": {
+        "properties": {
+          "lon": {
+            "type": "number",
+            "format": "double"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "id": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": [
+              "value",
+              "key"
+            ],
+            "type": "object"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "country": {
+            "type": "string"
+          },
+          "zip": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "line2": {
+            "type": "string"
+          },
+          "line1": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "country",
+          "zip",
+          "state",
+          "city",
+          "line1",
+          "id"
+        ],
+        "type": "object"
+      },
+      "TurvoLatLng": {
+        "properties": {
+          "lon": {
+            "type": "number",
+            "format": "double"
+          },
+          "lat": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "lon",
+          "lat"
+        ],
+        "type": "object"
+      },
+      "TurvoGeofence": {
+        "properties": {
+          "radius": {
+            "properties": {
+              "units": {
+                "properties": {
+                  "value": {
+                    "type": "string"
+                  },
+                  "key": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "value",
+                  "key"
+                ],
+                "type": "object"
+              },
+              "polygon": {
+                "items": {
+                  "$ref": "#/components/schemas/TurvoLatLng"
+                },
+                "type": "array"
+              },
+              "value": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "required": [
+              "units",
+              "value"
+            ],
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "radius",
+          "type"
+        ],
+        "type": "object"
+      },
+      "TurvoEmail": {
+        "properties": {
+          "type": {
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "id": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "type": "object"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "id": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "email"
+        ],
+        "type": "object"
+      },
+      "TurvoHoursOfOperation": {
+        "properties": {
+          "days": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "end": {
+            "type": "string"
+          },
+          "start": {
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "TurvoPhone": {
+        "properties": {
+          "type": {
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "key": {
+                "type": "string"
+              },
+              "id": {
+                "type": "number",
+                "format": "double"
+              }
+            },
+            "type": "object"
+          },
+          "isPrimary": {
+            "type": "boolean"
+          },
+          "deleted": {
+            "type": "boolean"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "number": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "TurvoSchedulingType": {
+        "properties": {
+          "id": {
+            "type": "number",
+            "format": "double"
+          },
+          "value": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "id"
+        ],
+        "type": "object"
+      },
+      "TurvoLocationWebhookPayload": {
+        "properties": {
+          "timezone": {
+            "type": "string"
+          },
+          "specialInstructions": {
+            "type": "string"
+          },
+          "shippingHours": {
+            "$ref": "#/components/schemas/TurvoHoursOfOperation"
+          },
+          "schedulingType": {
+            "$ref": "#/components/schemas/TurvoSchedulingType"
+          },
+          "phone": {
+            "items": {
+              "$ref": "#/components/schemas/TurvoPhone"
+            },
+            "type": "array"
+          },
+          "hoursOfOperation": {
+            "$ref": "#/components/schemas/TurvoHoursOfOperation"
+          },
+          "email": {
+            "items": {
+              "$ref": "#/components/schemas/TurvoEmail"
+            },
+            "type": "array"
+          },
+          "geofence": {
+            "$ref": "#/components/schemas/TurvoGeofence"
+          },
+          "directions": {
+            "type": "string"
+          },
+          "crossDock": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  ""
+                ]
+              }
+            ]
+          },
+          "coldStorage": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "string",
+                "enum": [
+                  ""
+                ]
+              }
+            ]
+          },
+          "address": {
+            "items": {
+              "$ref": "#/components/schemas/TurvoLocationAddress"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "id": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "timezone",
+          "address",
+          "name",
+          "id"
+        ],
+        "type": "object"
+      },
+      "TurvoWebhookRequest_TurvoLocationWebhookPayload.TurvoLocationEventName_": {
+        "properties": {
+          "eventPayload": {
+            "$ref": "#/components/schemas/TurvoLocationWebhookPayload"
+          },
+          "eventTime": {
+            "type": "string"
+          },
+          "eventName": {
+            "$ref": "#/components/schemas/TurvoLocationEventName"
+          },
+          "tenantId": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "eventPayload",
+          "eventTime",
+          "eventName",
+          "tenantId"
+        ],
+        "type": "object"
+      },
+      "TurvoCreateOrUpdateLocationInput": {
+        "$ref": "#/components/schemas/TurvoWebhookRequest_TurvoLocationWebhookPayload.TurvoLocationEventName_"
+      },
+      "WebhookResponse": {
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "success"
+        ],
+        "type": "object"
+      }
+    }
+  },
+  "openapi": "3.0.0",
+  "paths": {
+    "/quotes/search": {
+      "post": {
+        "operationId": "GetQuotes",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/V0.GetQuotesPayload"
+                    },
+                    {
+                      "$ref": "#/components/schemas/V0.PaginatedResponse"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotes"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/V0.GetQuotesInput"
+              }
+            }
           }
         }
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
+    "/quotes/{quoteId}": {
+      "get": {
+        "operationId": "GetQuote",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/V0.GetQuotePayload"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Quotes"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "quoteId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
       }
     }
+  },
+  "servers": [
+    {
+      "url": "/v0"
+    }
+  ],
+  "info": {
+    "title": "Vooma API",
+    "version": "0.1.0",
+    "contact": {}
   }
 }
