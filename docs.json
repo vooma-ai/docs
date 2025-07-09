@@ -51,10 +51,47 @@
             "pages": ["api-reference/introduction"]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Quotes",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/search"
+              "api-reference/quotes/get",
+              "api-reference/quotes/search",
+              "api-reference/quotes/onCreateOrUpdate"
+            ]
+          },
+          {
+            "group": "Movements",
+            "pages": [
+              "api-reference/movements/get",
+              "api-reference/movements/upsert",
+              "api-reference/movements/onCreateOrUpdate",
+              "api-reference/movements/onAppointmentCreateOrUpdate",
+              "api-reference/movements/onCarrierOffer",
+              "api-reference/movements/onCarrierAssigned",
+              "api-reference/movements/onTrackingUpdate"
+            ]
+          },
+          {
+            "group": "Customers",
+            "pages": [
+              "api-reference/customers/get",
+              "api-reference/customers/upsert",
+              "api-reference/customers/onCreateOrUpdate"
+            ]
+          },
+          {
+            "group": "Carriers",
+            "pages": [
+              "api-reference/carriers/get",
+              "api-reference/carriers/upsert",
+              "api-reference/carriers/onCreateOrUpdate"
+            ]
+          },
+          {
+            "group": "Facilities",
+            "pages": [
+              "api-reference/facilities/get",
+              "api-reference/facilities/upsert",
+              "api-reference/facilities/onCreateOrUpdate"
             ]
           }
         ]
