@@ -7,7 +7,11 @@ icon: "inbox"
 import CustomerSync from "/snippets/integration-requirements/customer-sync.mdx";
 import FacilitySync from "/snippets/integration-requirements/facility-sync.mdx";
 
-# Integration Requirements
+## Partnered TMS
+
+If you use one of our partnered TMS platforms, Vooma build will work out-of-the-box.
+
+## Custom Integration
 
 <AccordionGroup>
   <Accordion title="Set up bidirectional Customer sync">
@@ -17,6 +21,7 @@ import FacilitySync from "/snippets/integration-requirements/facility-sync.mdx";
     <FacilitySync />
   </Accordion>
   <Accordion title="Receive webhooks on Movement creation or update">
-    Implement an endpoint that handles the [Create or Update Movement](/api-reference/movements/onCreateOrUpdate) webhook
+    Implement an endpoint that handles the [Create or Update
+    Movement](/api-reference/movements/onCreateOrUpdate) webhook
   </Accordion>
 </AccordionGroup>
