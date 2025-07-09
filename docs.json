@@ -18,14 +18,27 @@
             "pages": ["index", "development"]
           },
           {
-            "group": "Essentials",
+            "group": "Workflows",
             "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
+              "workflows/quote",
+              "workflows/build",
+              "workflows/schedule",
+              "workflows/cover",
+              "workflows/track",
+              "workflows/collect"
+            ]
+          },
+          {
+            "group": "Platform",
+            "pages": ["platform/insights", "platform/sops", "platform/command"]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              "integrations/tms",
+              "integrations/api",
+              "integrations/tools",
+              "integrations/channels"
             ]
           }
         ]
