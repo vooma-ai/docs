@@ -4,13 +4,19 @@ description: "Free your team from manual data entry to focus on more important t
 icon: "inbox"
 ---
 
+import CustomerSync from "/snippets/integration-requirements/customer-sync.mdx";
+import FacilitySync from "/snippets/integration-requirements/facility-sync.mdx";
+
 # Integration Requirements
 
 <AccordionGroup>
-  <Accordion title="Set up Customer sync">
-    <CustomerSync/>
+  <Accordion title="Set up bidirectional Customer sync">
+    <CustomerSync />
   </Accordion>
-  <Accordion title="Set up Facility sync">
+  <Accordion title="Set up bidirectional Facility sync">
     <FacilitySync />
+  </Accordion>
+  <Accordion title="Receive webhooks on Movement creation or update">
+    Implement an endpoint that handles the Create or Update Movement webhook
   </Accordion>
 </AccordionGroup>
