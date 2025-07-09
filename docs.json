@@ -55,7 +55,8 @@
             "pages": [
               "api-reference/quotes/get",
               "api-reference/quotes/search",
-              "api-reference/quotes/onCreateOrUpdate"
+              "api-reference/quotes/onCreateOrUpdate",
+              "api-reference/quotes/update"
             ]
           },
           {
