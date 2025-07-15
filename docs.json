@@ -52,46 +52,37 @@
           },
           {
             "group": "Quotes",
-            "pages": [
-              "api-reference/quotes/get",
-              "api-reference/quotes/search",
-              "api-reference/quotes/onCreateOrUpdate"
-            ]
+            "pages": ["api-reference/quotes/get", "api-reference/quotes/search"]
           },
           {
             "group": "Movements",
-            "pages": [
-              "api-reference/movements/get",
-              "api-reference/movements/upsert",
-              "api-reference/movements/onCreateOrUpdate",
-              "api-reference/movements/onAppointmentCreateOrUpdate",
-              "api-reference/movements/onCarrierOffer",
-              "api-reference/movements/onCarrierAssigned",
-              "api-reference/movements/onTrackingUpdate"
-            ]
+            "pages": []
           },
           {
             "group": "Customers",
             "pages": [
               "api-reference/customers/get",
-              "api-reference/customers/upsert",
-              "api-reference/customers/onCreateOrUpdate"
+              "api-reference/customers/create",
+              "api-reference/customers/update",
+              "api-reference/customers/onCreate",
+              "api-reference/customers/onUpdate"
             ]
           },
           {
             "group": "Carriers",
             "pages": [
               "api-reference/carriers/get",
-              "api-reference/carriers/upsert",
-              "api-reference/carriers/onCreateOrUpdate"
+              "api-reference/carriers/upsert"
             ]
           },
           {
-            "group": "Facilities",
+            "group": "Locations",
             "pages": [
-              "api-reference/facilities/get",
-              "api-reference/facilities/upsert",
-              "api-reference/facilities/onCreateOrUpdate"
+              "api-reference/locations/get",
+              "api-reference/locations/create",
+              "api-reference/locations/update",
+              "api-reference/locations/onCreate",
+              "api-reference/locations/onUpdate"
             ]
           }
         ]
