@@ -868,7 +868,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "Location": {
+      "LocationData": {
         "properties": {
           "externalIds": {
             "items": {
@@ -888,6 +888,24 @@
           "address"
         ],
         "type": "object"
+      },
+      "MayHaveID_LocationData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/LocationData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Location": {
+        "$ref": "#/components/schemas/MayHaveID_LocationData_"
       },
       "DateTimeRange": {
         "properties": {
@@ -958,7 +976,13 @@
       "CustomerExternalIdentifierType": {
         "enum": [
           "CUSTOM",
-          "TURVO"
+          "TURVO",
+          "TAI",
+          "MCLEOD",
+          "MCLEOD_HOSTED",
+          "THREE_PL",
+          "STRATEGY_LIVE",
+          "MERCURYGATE"
         ],
         "type": "string"
       },
@@ -986,7 +1010,7 @@
         "type": "object",
         "additionalProperties": false
       },
-      "Customer": {
+      "CustomerData": {
         "properties": {
           "name": {
             "type": "string"
@@ -996,17 +1020,31 @@
               "$ref": "#/components/schemas/CustomerExternalIdentifier"
             },
             "type": "array"
-          },
-          "id": {
-            "type": "string"
           }
         },
         "required": [
           "name",
-          "externalIds",
-          "id"
+          "externalIds"
         ],
         "type": "object"
+      },
+      "MayHaveID_CustomerData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomerData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Customer": {
+        "$ref": "#/components/schemas/MayHaveID_CustomerData_"
       },
       "EquipmentType": {
         "enum": [
@@ -2789,6 +2827,9 @@
       },
       "WebhookResponse": {
         "properties": {
+          "shipmentId": {
+            "type": "string"
+          },
           "error": {
             "type": "string"
           },
@@ -2800,10 +2841,130 @@
           "success"
         ],
         "type": "object"
+      },
+      "GetCustomerPayload": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          }
+        },
+        "required": [
+          "customer"
+        ],
+        "type": "object"
+      },
+      "CreateCustomerInput": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/CustomerData"
+          }
+        },
+        "required": [
+          "customer"
+        ],
+        "type": "object"
+      },
+      "UpdateCustomerInput": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/CustomerData"
+          }
+        },
+        "required": [
+          "customer"
+        ],
+        "type": "object"
+      },
+      "GetLocationPayload": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          }
+        },
+        "required": [
+          "location"
+        ],
+        "type": "object"
+      },
+      "CreateLocationInput": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationData"
+          }
+        },
+        "required": [
+          "location"
+        ],
+        "type": "object"
+      },
+      "UpdateLocationInput": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/LocationData"
+          }
+        },
+        "required": [
+          "location"
+        ],
+        "type": "object"
+      },
+      "LocationCreatedEvent": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "location.created"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "location",
+          "event"
+        ],
+        "type": "object"
+      },
+      "LocationUpdatedEvent": {
+        "properties": {
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "location.updated"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "location",
+          "event"
+        ],
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "basic": {
+        "scheme": "basic",
+        "type": "http"
+      },
+      "auth0": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },
-  "openapi": "3.0.0",
+  "info": {
+    "title": "api",
+    "version": "0.1.0",
+    "contact": {}
+  },
+  "openapi": "3.1.0",
   "paths": {
     "/quotes/search": {
       "post": {
@@ -2882,6 +3043,286 @@
           }
         ]
       }
+    },
+    "/customers/{customerId}": {
+      "get": {
+        "operationId": "GetCustomer",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCustomerPayload"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "UpdateCustomer",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "customerId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCustomerInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers": {
+      "post": {
+        "operationId": "CreateCustomer",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Customer"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Customers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCustomerInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations/{locationId}": {
+      "get": {
+        "operationId": "GetLocation",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetLocationPayload"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "UpdateLocation",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "locationId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateLocationInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/locations": {
+      "post": {
+        "operationId": "CreateLocation",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Location"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Locations"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateLocationInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/on-location-created": {
+      "post": {
+        "operationId": "OnLocationCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a location is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/on-location-updated": {
+      "post": {
+        "operationId": "OnLocationUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a location is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "servers": [
@@ -2889,9 +3330,58 @@
       "url": "/v0"
     }
   ],
-  "info": {
-    "title": "Vooma API",
-    "version": "0.1.0",
-    "contact": {}
+  "webhooks": {
+    "/on-location-created": {
+      "post": {
+        "operationId": "OnLocationCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a location is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/on-location-updated": {
+      "post": {
+        "operationId": "OnLocationUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a location is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocationUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
