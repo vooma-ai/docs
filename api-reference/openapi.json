@@ -33,11 +33,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "roles",
-          "username",
-          "id"
-        ],
+        "required": ["roles", "username", "id"],
         "type": "object"
       },
       "ChangeRoleInput": {
@@ -49,9 +45,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "roles"
-        ],
+        "required": ["roles"],
         "type": "object"
       },
       "ApiKeyPayload": {
@@ -61,9 +55,7 @@
             "description": "Make sure to store the key in a safe place.\nYou won't be able to see it again."
           }
         },
-        "required": [
-          "apiKey"
-        ],
+        "required": ["apiKey"],
         "type": "object"
       },
       "GenerateApiKeyInput": {
@@ -72,16 +64,11 @@
             "type": "string"
           }
         },
-        "required": [
-          "email"
-        ],
+        "required": ["email"],
         "type": "object"
       },
       "LoadTestType": {
-        "enum": [
-          "RANDOM_USERS",
-          "SPECIFIC_USERS"
-        ],
+        "enum": ["RANDOM_USERS", "SPECIFIC_USERS"],
         "type": "string"
       },
       "MessageSourceDistributionItem": {
@@ -97,10 +84,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "s3Url",
-          "weight"
-        ],
+        "required": ["s3Url", "weight"],
         "type": "object"
       },
       "LoadTestParams": {
@@ -144,16 +128,10 @@
           },
           "status": {
             "type": "string",
-            "enum": [
-              "healthy",
-              "unhealthy"
-            ]
+            "enum": ["healthy", "unhealthy"]
           }
         },
-        "required": [
-          "timestamp",
-          "status"
-        ],
+        "required": ["timestamp", "status"],
         "type": "object"
       },
       "Error": {
@@ -168,10 +146,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "name",
-          "message"
-        ],
+        "required": ["name", "message"],
         "type": "object",
         "additionalProperties": false
       },
@@ -187,10 +162,7 @@
             "description": "start position of this term in the description, measured in Unicode characters."
           }
         },
-        "required": [
-          "value",
-          "offset"
-        ],
+        "required": ["value", "offset"],
         "type": "object",
         "additionalProperties": false
       },
@@ -367,10 +339,7 @@
             "description": "length of the entered term."
           }
         },
-        "required": [
-          "offset",
-          "length"
-        ],
+        "required": ["offset", "length"],
         "type": "object",
         "additionalProperties": false
       },
@@ -504,11 +473,7 @@
             "description": "contains an array of places, with information about the place.\nSee [Place Autocomplete Results](https://developers.google.com/places/web-service/autocomplete#place_autocomplete_results)\nfor information about these results. The Places API returns up to 5 results."
           }
         },
-        "required": [
-          "status",
-          "error_message",
-          "predictions"
-        ],
+        "required": ["status", "error_message", "predictions"],
         "type": "object",
         "additionalProperties": false
       },
@@ -553,11 +518,7 @@
             "description": "is an abbreviated textual name for the address component, if available.\nFor example, an address component for the state of Alaska may have a `long_name` of \"Alaska\" and a `short_name` of \"AK\"\nusing the 2-letter postal abbreviation."
           }
         },
-        "required": [
-          "types",
-          "long_name",
-          "short_name"
-        ],
+        "required": ["types", "long_name", "short_name"],
         "type": "object",
         "additionalProperties": false
       },
@@ -572,10 +533,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "lat",
-          "lng"
-        ],
+        "required": ["lat", "lng"],
         "type": "object",
         "additionalProperties": false
       },
@@ -598,10 +556,7 @@
             "$ref": "#/components/schemas/LatLngLiteral"
           }
         },
-        "required": [
-          "northeast",
-          "southwest"
-        ],
+        "required": ["northeast", "southwest"],
         "type": "object",
         "additionalProperties": false
       },
@@ -624,10 +579,7 @@
             "description": "(optionally returned) stores the bounding box which can fully contain the returned result.\nNote that these bounds may not match the recommended viewport.\n(For example, San Francisco includes the [Farallon islands](https://en.wikipedia.org/wiki/Farallon_Islands),\nwhich are technically part of the city, but probably should not be returned in the viewport.)"
           }
         },
-        "required": [
-          "location",
-          "viewport"
-        ],
+        "required": ["location", "viewport"],
         "type": "object",
         "additionalProperties": false
       },
@@ -642,10 +594,7 @@
             "description": "is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA)."
           }
         },
-        "required": [
-          "global_code",
-          "compound_code"
-        ],
+        "required": ["global_code", "compound_code"],
         "type": "object",
         "additionalProperties": false
       },
@@ -735,21 +684,12 @@
             "description": "contains an array of geocoded address information and geometry information.\n\nGenerally, only one entry in the `\"results\"` array is returned for address lookups,though the geocoder may return several results\nwhen address queries are ambiguous."
           }
         },
-        "required": [
-          "status",
-          "error_message",
-          "results"
-        ],
+        "required": ["status", "error_message", "results"],
         "type": "object",
         "additionalProperties": false
       },
       "QuoteStatus": {
-        "enum": [
-          "NEW",
-          "QUOTED",
-          "WON",
-          "LOST"
-        ],
+        "enum": ["NEW", "QUOTED", "WON", "LOST"],
         "type": "string"
       },
       "FreightMode": {
@@ -763,10 +703,7 @@
         "type": "string"
       },
       "DrayageSubtype": {
-        "enum": [
-          "IMPORT",
-          "EXPORT"
-        ],
+        "enum": ["IMPORT", "EXPORT"],
         "type": "string"
       },
       "FreightModeDetails": {
@@ -778,16 +715,11 @@
             "$ref": "#/components/schemas/FreightMode"
           }
         },
-        "required": [
-          "mode"
-        ],
+        "required": ["mode"],
         "type": "object"
       },
       "MileageUnits": {
-        "enum": [
-          "MI",
-          "KM"
-        ],
+        "enum": ["MI", "KM"],
         "type": "string"
       },
       "Mileage": {
@@ -800,17 +732,11 @@
             "format": "double"
           }
         },
-        "required": [
-          "uom",
-          "value"
-        ],
+        "required": ["uom", "value"],
         "type": "object"
       },
       "StopType": {
-        "enum": [
-          "PICKUP",
-          "DELIVERY"
-        ],
+        "enum": ["PICKUP", "DELIVERY"],
         "type": "string"
       },
       "Address": {
@@ -837,11 +763,7 @@
         "type": "object"
       },
       "LocationExternalIdentifierType": {
-        "enum": [
-          "CUSTOM",
-          "GOOGLE_PLACES",
-          "TURVO"
-        ],
+        "enum": ["CUSTOM", "GOOGLE_PLACES", "TURVO"],
         "type": "string"
       },
       "LocationExternalIdentifier": {
@@ -861,10 +783,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "type": "object",
         "additionalProperties": false
       },
@@ -883,10 +802,7 @@
             "$ref": "#/components/schemas/Address"
           }
         },
-        "required": [
-          "externalIds",
-          "address"
-        ],
+        "required": ["externalIds", "address"],
         "type": "object"
       },
       "MayHaveID_LocationData_": {
@@ -929,9 +845,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "startDate"
-        ],
+        "required": ["startDate"],
         "type": "object",
         "additionalProperties": false
       },
@@ -950,10 +864,7 @@
             "$ref": "#/components/schemas/StopType"
           }
         },
-        "required": [
-          "location",
-          "type"
-        ],
+        "required": ["location", "type"],
         "type": "object"
       },
       "Route": {
@@ -968,9 +879,7 @@
             "$ref": "#/components/schemas/Mileage"
           }
         },
-        "required": [
-          "stops"
-        ],
+        "required": ["stops"],
         "type": "object"
       },
       "CustomerExternalIdentifierType": {
@@ -1003,10 +912,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1022,10 +928,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "name",
-          "externalIds"
-        ],
+        "required": ["name", "externalIds"],
         "type": "object"
       },
       "MayHaveID_CustomerData_": {
@@ -1082,9 +985,7 @@
             "description": "Typically one of the EquipmentType enum values but subject to change"
           }
         },
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1094,16 +995,11 @@
             "type": "string"
           }
         },
-        "required": [
-          "description"
-        ],
+        "required": ["description"],
         "type": "object"
       },
       "WeightUnits": {
-        "enum": [
-          "LB",
-          "KG"
-        ],
+        "enum": ["LB", "KG"],
         "type": "string"
       },
       "Weight": {
@@ -1116,10 +1012,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "units",
-          "value"
-        ],
+        "required": ["units", "value"],
         "type": "object"
       },
       "FreightOrder": {
@@ -1168,10 +1061,7 @@
         "type": "string"
       },
       "CurrencyUnits": {
-        "enum": [
-          "USD",
-          "CAD"
-        ],
+        "enum": ["USD", "CAD"],
         "type": "string"
       },
       "Amount": {
@@ -1184,10 +1074,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "uom",
-          "value"
-        ],
+        "required": ["uom", "value"],
         "type": "object"
       },
       "RateExternalIdentifier": {
@@ -1207,10 +1094,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1239,11 +1123,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "amount",
-          "type",
-          "description"
-        ],
+        "required": ["amount", "type", "description"],
         "type": "object"
       },
       "Rate": {
@@ -1278,23 +1158,12 @@
             "type": "array"
           }
         },
-        "required": [
-          "id",
-          "method",
-          "amount",
-          "externalIds",
-          "components"
-        ],
+        "required": ["id", "method", "amount", "externalIds", "components"],
         "type": "object",
         "additionalProperties": false
       },
       "UserExternalIdentifierType": {
-        "enum": [
-          "CUSTOM",
-          "EMAIL",
-          "PHONE",
-          "VOOMA_USERNAME"
-        ],
+        "enum": ["CUSTOM", "EMAIL", "PHONE", "VOOMA_USERNAME"],
         "type": "string"
       },
       "UserExternalIdentifier": {
@@ -1314,10 +1183,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1333,10 +1199,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "externalIds",
-          "id"
-        ],
+        "required": ["externalIds", "id"],
         "type": "object"
       },
       "QuoteTags": {
@@ -1345,9 +1208,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "isAuction"
-        ],
+        "required": ["isAuction"],
         "type": "object"
       },
       "QuoteAutomation": {
@@ -1361,10 +1222,7 @@
             "description": "True if Vooma's AI identified the opportunity, whether it was\nidentified prior to user request or after"
           }
         },
-        "required": [
-          "requestedByUser",
-          "identifiedByVooma"
-        ],
+        "required": ["requestedByUser", "identifiedByVooma"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1440,9 +1298,7 @@
             "type": "array"
           }
         },
-        "required": [
-          "quotes"
-        ],
+        "required": ["quotes"],
         "type": "object"
       },
       "V0.PaginatedResponse": {
@@ -1503,11 +1359,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "radiusMiles",
-          "longitude",
-          "latitude"
-        ],
+        "required": ["radiusMiles", "longitude", "latitude"],
         "type": "object"
       },
       "LaneFilter": {
@@ -1522,10 +1374,7 @@
         "type": "object"
       },
       "AuctionType": {
-        "enum": [
-          "AUCTION",
-          "NON_AUCTION"
-        ],
+        "enum": ["AUCTION", "NON_AUCTION"],
         "type": "string"
       },
       "Pagination": {
@@ -1552,11 +1401,7 @@
         "type": "object"
       },
       "OpportunityType": {
-        "enum": [
-          "CONFIRMED",
-          "UNCONFIRMED",
-          "ALL"
-        ],
+        "enum": ["CONFIRMED", "UNCONFIRMED", "ALL"],
         "type": "string"
       },
       "V0.GetQuotesInput": {
@@ -1615,9 +1460,7 @@
             "$ref": "#/components/schemas/Quote"
           }
         },
-        "required": [
-          "quote"
-        ],
+        "required": ["quote"],
         "type": "object"
       },
       "V0.CreateQuotePayload": {
@@ -1626,9 +1469,7 @@
             "$ref": "#/components/schemas/Quote"
           }
         },
-        "required": [
-          "quote"
-        ],
+        "required": ["quote"],
         "type": "object"
       },
       "Pick_Quote.Exclude_keyofQuote.id__": {
@@ -1700,9 +1541,7 @@
             "$ref": "#/components/schemas/Omit_Quote.id_"
           }
         },
-        "required": [
-          "quote"
-        ],
+        "required": ["quote"],
         "type": "object"
       },
       "Pick_V0.FreightOrder.Exclude_keyofV0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails__": {
@@ -1714,9 +1553,7 @@
             "$ref": "#/components/schemas/Weight"
           }
         },
-        "required": [
-          "customer"
-        ],
+        "required": ["customer"],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -1739,10 +1576,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "units",
-          "value"
-        ],
+        "required": ["units", "value"],
         "type": "object"
       },
       "V0.Stop": {
@@ -1760,10 +1594,7 @@
             "$ref": "#/components/schemas/StopType"
           }
         },
-        "required": [
-          "location",
-          "type"
-        ],
+        "required": ["location", "type"],
         "type": "object"
       },
       "V0.Contact": {
@@ -1819,10 +1650,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "type",
-          "value"
-        ],
+        "required": ["type", "value"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1889,18 +1717,11 @@
             "format": "double"
           }
         },
-        "required": [
-          "units",
-          "value"
-        ],
+        "required": ["units", "value"],
         "type": "object"
       },
       "DimensionUnits": {
-        "enum": [
-          "IN",
-          "CM",
-          "FT"
-        ],
+        "enum": ["IN", "CM", "FT"],
         "type": "string"
       },
       "Dimension": {
@@ -1921,10 +1742,7 @@
             "description": "Typically one of the DimensionUnits enum values but subject to change"
           }
         },
-        "required": [
-          "value",
-          "units"
-        ],
+        "required": ["value", "units"],
         "type": "object",
         "additionalProperties": false
       },
@@ -1994,9 +1812,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "description"
-        ],
+        "required": ["description"],
         "type": "object"
       },
       "StrategyLiveStop": {
@@ -2041,9 +1857,7 @@
             "$ref": "#/components/schemas/StrategyLiveMileage"
           }
         },
-        "required": [
-          "stops"
-        ],
+        "required": ["stops"],
         "type": "object"
       },
       "V0.EquipmentType": {
@@ -2069,18 +1883,12 @@
             "description": "Typically one of the DimensionUnits enum values but subject to change"
           }
         },
-        "required": [
-          "value",
-          "units"
-        ],
+        "required": ["value", "units"],
         "type": "object",
         "additionalProperties": false
       },
       "TemperatureUnits": {
-        "enum": [
-          "F",
-          "C"
-        ],
+        "enum": ["F", "C"],
         "type": "string"
       },
       "V0.Temperature": {
@@ -2097,9 +1905,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "units"
-        ],
+        "required": ["units"],
         "type": "object"
       },
       "StrategyLiveEquipment": {
@@ -2121,9 +1927,7 @@
             ]
           }
         },
-        "required": [
-          "type"
-        ],
+        "required": ["type"],
         "type": "object"
       },
       "V0.FreightModeDetails": {
@@ -2135,9 +1939,7 @@
             "$ref": "#/components/schemas/FreightMode"
           }
         },
-        "required": [
-          "mode"
-        ],
+        "required": ["mode"],
         "type": "object"
       },
       "V0.Accessorial": {
@@ -2165,10 +1967,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "units",
-          "value"
-        ],
+        "required": ["units", "value"],
         "type": "object"
       },
       "V0.LineItemType": {
@@ -2195,10 +1994,7 @@
             ]
           }
         },
-        "required": [
-          "amount",
-          "description"
-        ],
+        "required": ["amount", "description"],
         "type": "object"
       },
       "Record_string.string_": {
@@ -2276,11 +2072,7 @@
                 "$ref": "#/components/schemas/StrategyLiveRoute"
               }
             },
-            "required": [
-              "commodities",
-              "equipment",
-              "route"
-            ],
+            "required": ["commodities", "equipment", "route"],
             "type": "object"
           }
         ]
@@ -2297,10 +2089,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "externalIds",
-          "id"
-        ],
+        "required": ["externalIds", "id"],
         "type": "object"
       },
       "StrategyLiveOrder": {
@@ -2332,12 +2121,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "freightOrder",
-          "updatedAt",
-          "createdAt",
-          "id"
-        ],
+        "required": ["freightOrder", "updatedAt", "createdAt", "id"],
         "type": "object"
       },
       "GetOrderPayload": {
@@ -2346,9 +2130,7 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": [
-          "order"
-        ],
+        "required": ["order"],
         "type": "object"
       },
       "CreateOrderPayload": {
@@ -2357,9 +2139,7 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": [
-          "order"
-        ],
+        "required": ["order"],
         "type": "object"
       },
       "Pick_StrategyLiveOrder.Exclude_keyofStrategyLiveOrder.id__": {
@@ -2388,11 +2168,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "createdAt",
-          "updatedAt",
-          "freightOrder"
-        ],
+        "required": ["createdAt", "updatedAt", "freightOrder"],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -2409,9 +2185,7 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": [
-          "order"
-        ],
+        "required": ["order"],
         "type": "object"
       },
       "UpdateOrderInput": {
@@ -2423,9 +2197,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "type": "object"
       },
       "AttachDocumentPayload": {
@@ -2434,9 +2206,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "type": "object"
       },
       "AttachDocumentInput": {
@@ -2454,12 +2224,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "documentType",
-          "mimetype",
-          "filename",
-          "file"
-        ],
+        "required": ["documentType", "mimetype", "filename", "file"],
         "type": "object"
       },
       "TurvoCreateOrUpdateLocationPayload": {
@@ -2468,17 +2233,12 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "type": "object"
       },
       "TurvoLocationEventName": {
         "type": "string",
-        "enum": [
-          "LOCATION_ADD",
-          "LOCATION_UPDATE"
-        ]
+        "enum": ["LOCATION_ADD", "LOCATION_UPDATE"]
       },
       "TurvoLocationAddress": {
         "properties": {
@@ -2503,10 +2263,7 @@
                 "format": "double"
               }
             },
-            "required": [
-              "value",
-              "key"
-            ],
+            "required": ["value", "key"],
             "type": "object"
           },
           "isPrimary": {
@@ -2534,14 +2291,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "country",
-          "zip",
-          "state",
-          "city",
-          "line1",
-          "id"
-        ],
+        "required": ["country", "zip", "state", "city", "line1", "id"],
         "type": "object"
       },
       "TurvoLatLng": {
@@ -2555,10 +2305,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "lon",
-          "lat"
-        ],
+        "required": ["lon", "lat"],
         "type": "object"
       },
       "TurvoGeofence": {
@@ -2574,10 +2321,7 @@
                     "type": "string"
                   }
                 },
-                "required": [
-                  "value",
-                  "key"
-                ],
+                "required": ["value", "key"],
                 "type": "object"
               },
               "polygon": {
@@ -2591,20 +2335,14 @@
                 "format": "double"
               }
             },
-            "required": [
-              "units",
-              "value"
-            ],
+            "required": ["units", "value"],
             "type": "object"
           },
           "type": {
             "type": "string"
           }
         },
-        "required": [
-          "radius",
-          "type"
-        ],
+        "required": ["radius", "type"],
         "type": "object"
       },
       "TurvoEmail": {
@@ -2637,10 +2375,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id",
-          "email"
-        ],
+        "required": ["id", "email"],
         "type": "object"
       },
       "TurvoHoursOfOperation": {
@@ -2693,9 +2428,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object"
       },
       "TurvoSchedulingType": {
@@ -2711,9 +2444,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "id"
-        ],
+        "required": ["id"],
         "type": "object"
       },
       "TurvoLocationWebhookPayload": {
@@ -2758,9 +2489,7 @@
               },
               {
                 "type": "string",
-                "enum": [
-                  ""
-                ]
+                "enum": [""]
               }
             ]
           },
@@ -2771,9 +2500,7 @@
               },
               {
                 "type": "string",
-                "enum": [
-                  ""
-                ]
+                "enum": [""]
               }
             ]
           },
@@ -2791,12 +2518,7 @@
             "format": "double"
           }
         },
-        "required": [
-          "timezone",
-          "address",
-          "name",
-          "id"
-        ],
+        "required": ["timezone", "address", "name", "id"],
         "type": "object"
       },
       "TurvoWebhookRequest_TurvoLocationWebhookPayload.TurvoLocationEventName_": {
@@ -2814,12 +2536,7 @@
             "type": "string"
           }
         },
-        "required": [
-          "eventPayload",
-          "eventTime",
-          "eventName",
-          "tenantId"
-        ],
+        "required": ["eventPayload", "eventTime", "eventName", "tenantId"],
         "type": "object"
       },
       "TurvoCreateOrUpdateLocationInput": {
@@ -2837,9 +2554,7 @@
             "type": "boolean"
           }
         },
-        "required": [
-          "success"
-        ],
+        "required": ["success"],
         "type": "object"
       },
       "GetCustomerPayload": {
@@ -2848,9 +2563,7 @@
             "$ref": "#/components/schemas/Customer"
           }
         },
-        "required": [
-          "customer"
-        ],
+        "required": ["customer"],
         "type": "object"
       },
       "CreateCustomerInput": {
@@ -2859,9 +2572,7 @@
             "$ref": "#/components/schemas/CustomerData"
           }
         },
-        "required": [
-          "customer"
-        ],
+        "required": ["customer"],
         "type": "object"
       },
       "UpdateCustomerInput": {
@@ -2870,9 +2581,7 @@
             "$ref": "#/components/schemas/CustomerData"
           }
         },
-        "required": [
-          "customer"
-        ],
+        "required": ["customer"],
         "type": "object"
       },
       "GetLocationPayload": {
@@ -2881,9 +2590,7 @@
             "$ref": "#/components/schemas/Location"
           }
         },
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object"
       },
       "CreateLocationInput": {
@@ -2892,9 +2599,7 @@
             "$ref": "#/components/schemas/LocationData"
           }
         },
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object"
       },
       "UpdateLocationInput": {
@@ -2903,9 +2608,7 @@
             "$ref": "#/components/schemas/LocationData"
           }
         },
-        "required": [
-          "location"
-        ],
+        "required": ["location"],
         "type": "object"
       },
       "LocationCreatedEvent": {
@@ -2915,16 +2618,11 @@
           },
           "event": {
             "type": "string",
-            "enum": [
-              "location.created"
-            ],
+            "enum": ["location.created"],
             "nullable": false
           }
         },
-        "required": [
-          "location",
-          "event"
-        ],
+        "required": ["location", "event"],
         "type": "object"
       },
       "LocationUpdatedEvent": {
@@ -2934,16 +2632,39 @@
           },
           "event": {
             "type": "string",
-            "enum": [
-              "location.updated"
-            ],
+            "enum": ["location.updated"],
             "nullable": false
           }
         },
-        "required": [
-          "location",
-          "event"
-        ],
+        "required": ["location", "event"],
+        "type": "object"
+      },
+      "CustomerCreatedEvent": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "event": {
+            "type": "string",
+            "enum": ["customer.created"],
+            "nullable": false
+          }
+        },
+        "required": ["customer", "event"],
+        "type": "object"
+      },
+      "CustomerUpdatedEvent": {
+        "properties": {
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "event": {
+            "type": "string",
+            "enum": ["customer.updated"],
+            "nullable": false
+          }
+        },
+        "required": ["customer", "event"],
         "type": "object"
       }
     },
@@ -2988,9 +2709,7 @@
             }
           }
         },
-        "tags": [
-          "Quotes"
-        ],
+        "tags": ["Quotes"],
         "security": [
           {
             "basic": []
@@ -3024,9 +2743,7 @@
             }
           }
         },
-        "tags": [
-          "Quotes"
-        ],
+        "tags": ["Quotes"],
         "security": [
           {
             "basic": []
@@ -3059,9 +2776,7 @@
             }
           }
         },
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "security": [
           {
             "basic": []
@@ -3092,9 +2807,7 @@
             }
           }
         },
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "security": [
           {
             "basic": []
@@ -3137,9 +2850,7 @@
             }
           }
         },
-        "tags": [
-          "Customers"
-        ],
+        "tags": ["Customers"],
         "security": [
           {
             "basic": []
@@ -3173,9 +2884,7 @@
             }
           }
         },
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "security": [
           {
             "basic": []
@@ -3206,9 +2915,7 @@
             }
           }
         },
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "security": [
           {
             "basic": []
@@ -3251,9 +2958,7 @@
             }
           }
         },
-        "tags": [
-          "Locations"
-        ],
+        "tags": ["Locations"],
         "security": [
           {
             "basic": []
@@ -3272,7 +2977,7 @@
         }
       }
     },
-    "/webhooks/on-location-created": {
+    "/webhooks/locations/on-created": {
       "post": {
         "operationId": "OnLocationCreated",
         "responses": {
@@ -3298,7 +3003,7 @@
         }
       }
     },
-    "/webhooks/on-location-updated": {
+    "/webhooks/locations/on-updated": {
       "post": {
         "operationId": "OnLocationUpdated",
         "responses": {
@@ -3318,6 +3023,58 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/LocationUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/customers/on-created": {
+      "post": {
+        "operationId": "OnCustomerCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a customer is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/customers/on-updated": {
+      "post": {
+        "operationId": "OnCustomerUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a customer is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerUpdatedEvent"
               }
             }
           }
@@ -3331,7 +3088,7 @@
     }
   ],
   "webhooks": {
-    "/on-location-created": {
+    "/locations/on-created": {
       "post": {
         "operationId": "OnLocationCreated",
         "responses": {
@@ -3357,7 +3114,7 @@
         }
       }
     },
-    "/on-location-updated": {
+    "/locations/on-updated": {
       "post": {
         "operationId": "OnLocationUpdated",
         "responses": {
@@ -3377,6 +3134,58 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/LocationUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/on-created": {
+      "post": {
+        "operationId": "OnCustomerCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a customer is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/on-updated": {
+      "post": {
+        "operationId": "OnCustomerUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a customer is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomerUpdatedEvent"
               }
             }
           }
