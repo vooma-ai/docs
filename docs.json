@@ -56,7 +56,13 @@
           },
           {
             "group": "Movements",
-            "pages": []
+            "pages": [
+              "api-reference/movements/get",
+              "api-reference/movements/create",
+              "api-reference/movements/update",
+              "api-reference/movements/onCreate",
+              "api-reference/movements/onUpdate"
+            ]
           },
           {
             "group": "Customers",
@@ -72,7 +78,10 @@
             "group": "Carriers",
             "pages": [
               "api-reference/carriers/get",
-              "api-reference/carriers/upsert"
+              "api-reference/carriers/create",
+              "api-reference/carriers/update",
+              "api-reference/carriers/onCreate",
+              "api-reference/carriers/onUpdate"
             ]
           },
           {

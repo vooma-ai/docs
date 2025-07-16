@@ -33,7 +33,11 @@
             "type": "string"
           }
         },
-        "required": ["roles", "username", "id"],
+        "required": [
+          "roles",
+          "username",
+          "id"
+        ],
         "type": "object"
       },
       "ChangeRoleInput": {
@@ -45,7 +49,9 @@
             "type": "array"
           }
         },
-        "required": ["roles"],
+        "required": [
+          "roles"
+        ],
         "type": "object"
       },
       "ApiKeyPayload": {
@@ -55,7 +61,9 @@
             "description": "Make sure to store the key in a safe place.\nYou won't be able to see it again."
           }
         },
-        "required": ["apiKey"],
+        "required": [
+          "apiKey"
+        ],
         "type": "object"
       },
       "GenerateApiKeyInput": {
@@ -64,11 +72,16 @@
             "type": "string"
           }
         },
-        "required": ["email"],
+        "required": [
+          "email"
+        ],
         "type": "object"
       },
       "LoadTestType": {
-        "enum": ["RANDOM_USERS", "SPECIFIC_USERS"],
+        "enum": [
+          "RANDOM_USERS",
+          "SPECIFIC_USERS"
+        ],
         "type": "string"
       },
       "MessageSourceDistributionItem": {
@@ -84,7 +97,10 @@
             "type": "string"
           }
         },
-        "required": ["s3Url", "weight"],
+        "required": [
+          "s3Url",
+          "weight"
+        ],
         "type": "object"
       },
       "LoadTestParams": {
@@ -128,10 +144,16 @@
           },
           "status": {
             "type": "string",
-            "enum": ["healthy", "unhealthy"]
+            "enum": [
+              "healthy",
+              "unhealthy"
+            ]
           }
         },
-        "required": ["timestamp", "status"],
+        "required": [
+          "timestamp",
+          "status"
+        ],
         "type": "object"
       },
       "Error": {
@@ -146,7 +168,10 @@
             "type": "string"
           }
         },
-        "required": ["name", "message"],
+        "required": [
+          "name",
+          "message"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -162,7 +187,10 @@
             "description": "start position of this term in the description, measured in Unicode characters."
           }
         },
-        "required": ["value", "offset"],
+        "required": [
+          "value",
+          "offset"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -339,7 +367,10 @@
             "description": "length of the entered term."
           }
         },
-        "required": ["offset", "length"],
+        "required": [
+          "offset",
+          "length"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -473,7 +504,11 @@
             "description": "contains an array of places, with information about the place.\nSee [Place Autocomplete Results](https://developers.google.com/places/web-service/autocomplete#place_autocomplete_results)\nfor information about these results. The Places API returns up to 5 results."
           }
         },
-        "required": ["status", "error_message", "predictions"],
+        "required": [
+          "status",
+          "error_message",
+          "predictions"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -518,7 +553,11 @@
             "description": "is an abbreviated textual name for the address component, if available.\nFor example, an address component for the state of Alaska may have a `long_name` of \"Alaska\" and a `short_name` of \"AK\"\nusing the 2-letter postal abbreviation."
           }
         },
-        "required": ["types", "long_name", "short_name"],
+        "required": [
+          "types",
+          "long_name",
+          "short_name"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -533,7 +572,10 @@
             "format": "double"
           }
         },
-        "required": ["lat", "lng"],
+        "required": [
+          "lat",
+          "lng"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -556,7 +598,10 @@
             "$ref": "#/components/schemas/LatLngLiteral"
           }
         },
-        "required": ["northeast", "southwest"],
+        "required": [
+          "northeast",
+          "southwest"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -579,7 +624,10 @@
             "description": "(optionally returned) stores the bounding box which can fully contain the returned result.\nNote that these bounds may not match the recommended viewport.\n(For example, San Francisco includes the [Farallon islands](https://en.wikipedia.org/wiki/Farallon_Islands),\nwhich are technically part of the city, but probably should not be returned in the viewport.)"
           }
         },
-        "required": ["location", "viewport"],
+        "required": [
+          "location",
+          "viewport"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -594,7 +642,10 @@
             "description": "is a 6 character or longer local code with an explicit location (CWC8+R9, Mountain View, CA, USA)."
           }
         },
-        "required": ["global_code", "compound_code"],
+        "required": [
+          "global_code",
+          "compound_code"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -684,12 +735,21 @@
             "description": "contains an array of geocoded address information and geometry information.\n\nGenerally, only one entry in the `\"results\"` array is returned for address lookups,though the geocoder may return several results\nwhen address queries are ambiguous."
           }
         },
-        "required": ["status", "error_message", "results"],
+        "required": [
+          "status",
+          "error_message",
+          "results"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "QuoteStatus": {
-        "enum": ["NEW", "QUOTED", "WON", "LOST"],
+        "enum": [
+          "NEW",
+          "QUOTED",
+          "WON",
+          "LOST"
+        ],
         "type": "string"
       },
       "FreightMode": {
@@ -703,7 +763,10 @@
         "type": "string"
       },
       "DrayageSubtype": {
-        "enum": ["IMPORT", "EXPORT"],
+        "enum": [
+          "IMPORT",
+          "EXPORT"
+        ],
         "type": "string"
       },
       "FreightModeDetails": {
@@ -715,11 +778,16 @@
             "$ref": "#/components/schemas/FreightMode"
           }
         },
-        "required": ["mode"],
+        "required": [
+          "mode"
+        ],
         "type": "object"
       },
       "MileageUnits": {
-        "enum": ["MI", "KM"],
+        "enum": [
+          "MI",
+          "KM"
+        ],
         "type": "string"
       },
       "Mileage": {
@@ -732,11 +800,17 @@
             "format": "double"
           }
         },
-        "required": ["uom", "value"],
+        "required": [
+          "uom",
+          "value"
+        ],
         "type": "object"
       },
       "StopType": {
-        "enum": ["PICKUP", "DELIVERY"],
+        "enum": [
+          "PICKUP",
+          "DELIVERY"
+        ],
         "type": "string"
       },
       "Address": {
@@ -763,7 +837,11 @@
         "type": "object"
       },
       "LocationExternalIdentifierType": {
-        "enum": ["CUSTOM", "GOOGLE_PLACES", "TURVO"],
+        "enum": [
+          "CUSTOM",
+          "GOOGLE_PLACES",
+          "TURVO"
+        ],
         "type": "string"
       },
       "LocationExternalIdentifier": {
@@ -783,12 +861,35 @@
             "type": "string"
           }
         },
-        "required": ["type", "value"],
+        "required": [
+          "type",
+          "value"
+        ],
         "type": "object",
         "additionalProperties": false
       },
+      "GeoCoordinates": {
+        "properties": {
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "longitude",
+          "latitude"
+        ],
+        "type": "object"
+      },
       "LocationData": {
         "properties": {
+          "geoCoordinates": {
+            "$ref": "#/components/schemas/GeoCoordinates"
+          },
           "externalIds": {
             "items": {
               "$ref": "#/components/schemas/LocationExternalIdentifier"
@@ -802,7 +903,10 @@
             "$ref": "#/components/schemas/Address"
           }
         },
-        "required": ["externalIds", "address"],
+        "required": [
+          "externalIds",
+          "address"
+        ],
         "type": "object"
       },
       "MayHaveID_LocationData_": {
@@ -822,6 +926,13 @@
       },
       "Location": {
         "$ref": "#/components/schemas/MayHaveID_LocationData_"
+      },
+      "DateTimeRangeType": {
+        "enum": [
+          "FACILITY_HOURS",
+          "APPOINTMENT"
+        ],
+        "type": "string"
       },
       "DateTimeRange": {
         "properties": {
@@ -843,13 +954,18 @@
           },
           "timezone": {
             "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/DateTimeRangeType"
           }
         },
-        "required": ["startDate"],
+        "required": [
+          "startDate"
+        ],
         "type": "object",
         "additionalProperties": false
       },
-      "Stop": {
+      "QuoteStop": {
         "properties": {
           "notes": {
             "type": "string"
@@ -864,14 +980,17 @@
             "$ref": "#/components/schemas/StopType"
           }
         },
-        "required": ["location", "type"],
+        "required": [
+          "location",
+          "type"
+        ],
         "type": "object"
       },
-      "Route": {
+      "QuoteRoute": {
         "properties": {
           "stops": {
             "items": {
-              "$ref": "#/components/schemas/Stop"
+              "$ref": "#/components/schemas/QuoteStop"
             },
             "type": "array"
           },
@@ -879,7 +998,9 @@
             "$ref": "#/components/schemas/Mileage"
           }
         },
-        "required": ["stops"],
+        "required": [
+          "stops"
+        ],
         "type": "object"
       },
       "CustomerExternalIdentifierType": {
@@ -912,29 +1033,31 @@
             "type": "string"
           }
         },
-        "required": ["type", "value"],
+        "required": [
+          "type",
+          "value"
+        ],
         "type": "object",
         "additionalProperties": false
       },
-      "CustomerData": {
+      "ContactData": {
         "properties": {
-          "name": {
+          "email": {
             "type": "string"
           },
-          "externalIds": {
-            "items": {
-              "$ref": "#/components/schemas/CustomerExternalIdentifier"
-            },
-            "type": "array"
+          "phone": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
           }
         },
-        "required": ["name", "externalIds"],
         "type": "object"
       },
-      "MayHaveID_CustomerData_": {
+      "MayHaveID_ContactData_": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/CustomerData"
+            "$ref": "#/components/schemas/ContactData"
           },
           {
             "properties": {
@@ -946,8 +1069,53 @@
           }
         ]
       },
+      "Contact": {
+        "$ref": "#/components/schemas/MayHaveID_ContactData_"
+      },
+      "CustomerData": {
+        "properties": {
+          "contacts": {
+            "items": {
+              "$ref": "#/components/schemas/Contact"
+            },
+            "type": "array"
+          },
+          "name": {
+            "type": "string"
+          },
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/CustomerExternalIdentifier"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "externalIds"
+        ],
+        "type": "object"
+      },
+      "WithId_CustomerData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CustomerData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
+          }
+        ]
+      },
       "Customer": {
-        "$ref": "#/components/schemas/MayHaveID_CustomerData_"
+        "$ref": "#/components/schemas/WithId_CustomerData_"
       },
       "EquipmentType": {
         "enum": [
@@ -971,6 +1139,65 @@
         ],
         "type": "string"
       },
+      "DimensionUnits": {
+        "enum": [
+          "IN",
+          "CM",
+          "FT"
+        ],
+        "type": "string"
+      },
+      "Dimension": {
+        "properties": {
+          "value": {
+            "type": "number",
+            "format": "double"
+          },
+          "units": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DimensionUnits"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the DimensionUnits enum values but subject to change"
+          }
+        },
+        "required": [
+          "value",
+          "units"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "TemperatureUnits": {
+        "enum": [
+          "F",
+          "C"
+        ],
+        "type": "string"
+      },
+      "Temperature": {
+        "properties": {
+          "units": {
+            "$ref": "#/components/schemas/TemperatureUnits"
+          },
+          "max": {
+            "type": "number",
+            "format": "double"
+          },
+          "min": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "required": [
+          "units"
+        ],
+        "type": "object"
+      },
       "Equipment": {
         "properties": {
           "type": {
@@ -983,23 +1210,113 @@
               }
             ],
             "description": "Typically one of the EquipmentType enum values but subject to change"
-          }
-        },
-        "required": ["type"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "Commodity": {
-        "properties": {
+          },
+          "equipmentLength": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "temperature": {
+            "$ref": "#/components/schemas/Temperature"
+          },
           "description": {
             "type": "string"
           }
         },
-        "required": ["description"],
-        "type": "object"
+        "required": [
+          "type"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ShippingUnits": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "type": "number"
+      },
+      "ReferenceType": {
+        "enum": [
+          "ORDER_REFERENCE",
+          "PURCHASE_ORDER",
+          "BILL_OF_LADING",
+          "INVOICE",
+          "SHIPMENT",
+          "SALES_ORDER",
+          "TRACKING",
+          "DELIVERY",
+          "CUSTOMER_REFERENCE",
+          "LOAD",
+          "CONTAINER",
+          "MASTER_BILL_OF_LADING",
+          "BOOKING",
+          "SEAL",
+          "PICKUP",
+          "APPOINTMENT",
+          "OTHER"
+        ],
+        "type": "string"
+      },
+      "Reference": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ReferenceType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the ReferenceType enum values\nbut subject to change"
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "HazmatContact": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Contact"
+          },
+          {
+            "properties": {
+              "reference": {
+                "$ref": "#/components/schemas/Reference"
+              }
+            },
+            "type": "object"
+          }
+        ]
       },
       "WeightUnits": {
-        "enum": ["LB", "KG"],
+        "enum": [
+          "LB",
+          "KG"
+        ],
         "type": "string"
       },
       "Weight": {
@@ -1012,7 +1329,177 @@
             "format": "double"
           }
         },
-        "required": ["units", "value"],
+        "required": [
+          "units",
+          "value"
+        ],
+        "type": "object"
+      },
+      "HazmatClass": {
+        "type": "string",
+        "enum": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "1.1",
+          "1.2",
+          "1.3",
+          "1.4",
+          "1.5",
+          "1.6",
+          "2.1",
+          "2.2",
+          "2.3",
+          "4.1",
+          "4.2",
+          "4.3",
+          "5.1",
+          "5.2",
+          "6.1",
+          "6.2"
+        ]
+      },
+      "HazmatClassQualifier": {
+        "type": "string",
+        "enum": [
+          "P",
+          "S"
+        ]
+      },
+      "HazmatClassification": {
+        "properties": {
+          "qualifier": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HazmatClassQualifier"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "hazardClass": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/HazmatClass"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          }
+        },
+        "required": [
+          "qualifier",
+          "hazardClass"
+        ],
+        "type": "object"
+      },
+      "HazmatDetails": {
+        "properties": {
+          "classifications": {
+            "items": {
+              "$ref": "#/components/schemas/HazmatClassification"
+            },
+            "type": "array"
+          },
+          "packingGroup": {
+            "type": "string"
+          },
+          "unNumber": {
+            "type": "string"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/HazmatContact"
+          }
+        },
+        "required": [
+          "classifications",
+          "contact"
+        ],
+        "type": "object"
+      },
+      "Dimensions": {
+        "properties": {
+          "height": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "width": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "length": {
+            "$ref": "#/components/schemas/Dimension"
+          }
+        },
+        "type": "object"
+      },
+      "Commodity": {
+        "properties": {
+          "isStackable": {
+            "type": "boolean"
+          },
+          "itemReference": {
+            "$ref": "#/components/schemas/Reference"
+          },
+          "dimensions": {
+            "$ref": "#/components/schemas/Dimensions"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "hazmat": {
+            "$ref": "#/components/schemas/HazmatDetails"
+          },
+          "nmfcCode": {
+            "type": "string"
+          },
+          "freightClass": {
+            "type": "string"
+          },
+          "pieceUnits": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShippingUnits"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "pieceQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "handlingUnits": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ShippingUnits"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "handlingQuantity": {
+            "type": "number",
+            "format": "double"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description"
+        ],
         "type": "object"
       },
       "FreightOrder": {
@@ -1033,7 +1520,7 @@
             "$ref": "#/components/schemas/Customer"
           },
           "route": {
-            "$ref": "#/components/schemas/Route"
+            "$ref": "#/components/schemas/QuoteRoute"
           },
           "freightModeDetails": {
             "$ref": "#/components/schemas/FreightModeDetails"
@@ -1061,7 +1548,10 @@
         "type": "string"
       },
       "CurrencyUnits": {
-        "enum": ["USD", "CAD"],
+        "enum": [
+          "USD",
+          "CAD"
+        ],
         "type": "string"
       },
       "Amount": {
@@ -1074,7 +1564,10 @@
             "format": "double"
           }
         },
-        "required": ["uom", "value"],
+        "required": [
+          "uom",
+          "value"
+        ],
         "type": "object"
       },
       "RateExternalIdentifier": {
@@ -1094,7 +1587,10 @@
             "type": "string"
           }
         },
-        "required": ["type", "value"],
+        "required": [
+          "type",
+          "value"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1123,7 +1619,11 @@
             "type": "string"
           }
         },
-        "required": ["amount", "type", "description"],
+        "required": [
+          "amount",
+          "type",
+          "description"
+        ],
         "type": "object"
       },
       "Rate": {
@@ -1158,12 +1658,23 @@
             "type": "array"
           }
         },
-        "required": ["id", "method", "amount", "externalIds", "components"],
+        "required": [
+          "id",
+          "method",
+          "amount",
+          "externalIds",
+          "components"
+        ],
         "type": "object",
         "additionalProperties": false
       },
       "UserExternalIdentifierType": {
-        "enum": ["CUSTOM", "EMAIL", "PHONE", "VOOMA_USERNAME"],
+        "enum": [
+          "CUSTOM",
+          "EMAIL",
+          "PHONE",
+          "VOOMA_USERNAME"
+        ],
         "type": "string"
       },
       "UserExternalIdentifier": {
@@ -1183,24 +1694,44 @@
             "type": "string"
           }
         },
-        "required": ["type", "value"],
+        "required": [
+          "type",
+          "value"
+        ],
         "type": "object",
         "additionalProperties": false
       },
-      "User": {
-        "properties": {
-          "externalIds": {
-            "items": {
-              "$ref": "#/components/schemas/UserExternalIdentifier"
+      "WithId__externalIds-UserExternalIdentifier-Array--__": {
+        "allOf": [
+          {
+            "properties": {
+              "externalIds": {
+                "items": {
+                  "$ref": "#/components/schemas/UserExternalIdentifier"
+                },
+                "type": "array"
+              }
             },
-            "type": "array"
+            "required": [
+              "externalIds"
+            ],
+            "type": "object"
           },
-          "id": {
-            "type": "string"
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
           }
-        },
-        "required": ["externalIds", "id"],
-        "type": "object"
+        ]
+      },
+      "User": {
+        "$ref": "#/components/schemas/WithId__externalIds-UserExternalIdentifier-Array--__"
       },
       "QuoteTags": {
         "properties": {
@@ -1208,7 +1739,9 @@
             "type": "boolean"
           }
         },
-        "required": ["isAuction"],
+        "required": [
+          "isAuction"
+        ],
         "type": "object"
       },
       "QuoteAutomation": {
@@ -1222,7 +1755,10 @@
             "description": "True if Vooma's AI identified the opportunity, whether it was\nidentified prior to user request or after"
           }
         },
-        "required": ["requestedByUser", "identifiedByVooma"],
+        "required": [
+          "requestedByUser",
+          "identifiedByVooma"
+        ],
         "type": "object",
         "additionalProperties": false
       },
@@ -1298,7 +1834,9 @@
             "type": "array"
           }
         },
-        "required": ["quotes"],
+        "required": [
+          "quotes"
+        ],
         "type": "object"
       },
       "V0.PaginatedResponse": {
@@ -1359,7 +1897,11 @@
             "format": "double"
           }
         },
-        "required": ["radiusMiles", "longitude", "latitude"],
+        "required": [
+          "radiusMiles",
+          "longitude",
+          "latitude"
+        ],
         "type": "object"
       },
       "LaneFilter": {
@@ -1374,7 +1916,10 @@
         "type": "object"
       },
       "AuctionType": {
-        "enum": ["AUCTION", "NON_AUCTION"],
+        "enum": [
+          "AUCTION",
+          "NON_AUCTION"
+        ],
         "type": "string"
       },
       "Pagination": {
@@ -1401,7 +1946,11 @@
         "type": "object"
       },
       "OpportunityType": {
-        "enum": ["CONFIRMED", "UNCONFIRMED", "ALL"],
+        "enum": [
+          "CONFIRMED",
+          "UNCONFIRMED",
+          "ALL"
+        ],
         "type": "string"
       },
       "V0.GetQuotesInput": {
@@ -1460,7 +2009,9 @@
             "$ref": "#/components/schemas/Quote"
           }
         },
-        "required": ["quote"],
+        "required": [
+          "quote"
+        ],
         "type": "object"
       },
       "V0.CreateQuotePayload": {
@@ -1469,7 +2020,9 @@
             "$ref": "#/components/schemas/Quote"
           }
         },
-        "required": ["quote"],
+        "required": [
+          "quote"
+        ],
         "type": "object"
       },
       "Pick_Quote.Exclude_keyofQuote.id__": {
@@ -1541,7 +2094,9 @@
             "$ref": "#/components/schemas/Omit_Quote.id_"
           }
         },
-        "required": ["quote"],
+        "required": [
+          "quote"
+        ],
         "type": "object"
       },
       "Pick_V0.FreightOrder.Exclude_keyofV0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails__": {
@@ -1553,7 +2108,9 @@
             "$ref": "#/components/schemas/Weight"
           }
         },
-        "required": ["customer"],
+        "required": [
+          "customer"
+        ],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -1561,119 +2118,23 @@
         "$ref": "#/components/schemas/Pick_V0.FreightOrder.Exclude_keyofV0.FreightOrder.route-or-equipment-or-commodities-or-freightModeDetails__",
         "description": "Construct a type with the properties of T except for those in type K."
       },
-      "V0.MileageUnits": {
-        "properties": {},
-        "type": "object",
-        "additionalProperties": false
-      },
       "StrategyLiveMileage": {
         "properties": {
           "units": {
-            "$ref": "#/components/schemas/V0.MileageUnits"
+            "$ref": "#/components/schemas/MileageUnits"
           },
           "value": {
             "type": "number",
             "format": "double"
           }
         },
-        "required": ["units", "value"],
-        "type": "object"
-      },
-      "V0.Stop": {
-        "properties": {
-          "notes": {
-            "type": "string"
-          },
-          "dateTimeRange": {
-            "$ref": "#/components/schemas/DateTimeRange"
-          },
-          "location": {
-            "$ref": "#/components/schemas/Location"
-          },
-          "type": {
-            "$ref": "#/components/schemas/StopType"
-          }
-        },
-        "required": ["location", "type"],
-        "type": "object"
-      },
-      "V0.Contact": {
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
-        "type": "object"
-      },
-      "ReferenceType": {
-        "enum": [
-          "ORDER_REFERENCE",
-          "PURCHASE_ORDER",
-          "BILL_OF_LADING",
-          "INVOICE",
-          "SHIPMENT",
-          "SALES_ORDER",
-          "TRACKING",
-          "DELIVERY",
-          "CUSTOMER_REFERENCE",
-          "LOAD",
-          "CONTAINER",
-          "MASTER_BILL_OF_LADING",
-          "BOOKING",
-          "SEAL",
-          "PICKUP",
-          "APPOINTMENT",
-          "OTHER"
+        "required": [
+          "units",
+          "value"
         ],
-        "type": "string"
-      },
-      "V0.Reference": {
-        "properties": {
-          "type": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/ReferenceType"
-              },
-              {
-                "type": "string"
-              }
-            ],
-            "description": "Typically one of the ReferenceType enum values\nbut subject to change"
-          },
-          "value": {
-            "type": "string"
-          }
-        },
-        "required": ["type", "value"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "V0.ShippingUnit": {
-        "properties": {},
-        "type": "object",
-        "additionalProperties": false
-      },
-      "Contact": {
-        "properties": {
-          "email": {
-            "type": "string"
-          },
-          "phone": {
-            "type": "string"
-          },
-          "name": {
-            "type": "string"
-          }
-        },
         "type": "object"
       },
-      "HazmatClassification": {
+      "StrategyLiveHazmatClassification": {
         "properties": {
           "qualifier": {
             "type": "string"
@@ -1684,11 +2145,11 @@
         },
         "type": "object"
       },
-      "V0.Hazmat": {
+      "StrategyLiveHazmat": {
         "properties": {
           "classifications": {
             "items": {
-              "$ref": "#/components/schemas/HazmatClassification"
+              "$ref": "#/components/schemas/StrategyLiveHazmatClassification"
             },
             "type": "array"
           },
@@ -1707,72 +2168,19 @@
         },
         "type": "object"
       },
-      "V0.Weight": {
-        "properties": {
-          "units": {
-            "$ref": "#/components/schemas/WeightUnits"
-          },
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": ["units", "value"],
-        "type": "object"
-      },
-      "DimensionUnits": {
-        "enum": ["IN", "CM", "FT"],
-        "type": "string"
-      },
-      "Dimension": {
-        "properties": {
-          "value": {
-            "type": "number",
-            "format": "double"
-          },
-          "units": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/DimensionUnits"
-              },
-              {
-                "type": "string"
-              }
-            ],
-            "description": "Typically one of the DimensionUnits enum values but subject to change"
-          }
-        },
-        "required": ["value", "units"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "V0.Dimensions": {
-        "properties": {
-          "height": {
-            "$ref": "#/components/schemas/Dimension"
-          },
-          "width": {
-            "$ref": "#/components/schemas/Dimension"
-          },
-          "length": {
-            "$ref": "#/components/schemas/Dimension"
-          }
-        },
-        "type": "object"
-      },
       "StrategyLiveCommodity": {
         "properties": {
           "itemReference": {
             "type": "string"
           },
           "dimensions": {
-            "$ref": "#/components/schemas/V0.Dimensions"
+            "$ref": "#/components/schemas/Dimensions"
           },
           "weight": {
-            "$ref": "#/components/schemas/V0.Weight"
+            "$ref": "#/components/schemas/Weight"
           },
           "hazmat": {
-            "$ref": "#/components/schemas/V0.Hazmat"
+            "$ref": "#/components/schemas/StrategyLiveHazmat"
           },
           "nmfcCode": {
             "type": "string"
@@ -1783,7 +2191,7 @@
           "pieceUnits": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/V0.ShippingUnit"
+                "$ref": "#/components/schemas/ShippingUnits"
               },
               {
                 "type": "string"
@@ -1797,7 +2205,7 @@
           "handlingUnits": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/V0.ShippingUnit"
+                "$ref": "#/components/schemas/ShippingUnits"
               },
               {
                 "type": "string"
@@ -1812,13 +2220,15 @@
             "type": "string"
           }
         },
-        "required": ["description"],
+        "required": [
+          "description"
+        ],
         "type": "object"
       },
       "StrategyLiveStop": {
         "allOf": [
           {
-            "$ref": "#/components/schemas/V0.Stop"
+            "$ref": "#/components/schemas/QuoteStop"
           },
           {
             "properties": {
@@ -1830,12 +2240,12 @@
               },
               "references": {
                 "items": {
-                  "$ref": "#/components/schemas/V0.Reference"
+                  "$ref": "#/components/schemas/Reference"
                 },
                 "type": "array"
               },
               "contact": {
-                "$ref": "#/components/schemas/V0.Contact"
+                "$ref": "#/components/schemas/Contact"
               },
               "externalNotes": {
                 "type": "string"
@@ -1857,69 +2267,23 @@
             "$ref": "#/components/schemas/StrategyLiveMileage"
           }
         },
-        "required": ["stops"],
-        "type": "object"
-      },
-      "V0.EquipmentType": {
-        "properties": {},
-        "type": "object",
-        "additionalProperties": false
-      },
-      "V0.Dimension": {
-        "properties": {
-          "value": {
-            "type": "number",
-            "format": "double"
-          },
-          "units": {
-            "anyOf": [
-              {
-                "$ref": "#/components/schemas/DimensionUnits"
-              },
-              {
-                "type": "string"
-              }
-            ],
-            "description": "Typically one of the DimensionUnits enum values but subject to change"
-          }
-        },
-        "required": ["value", "units"],
-        "type": "object",
-        "additionalProperties": false
-      },
-      "TemperatureUnits": {
-        "enum": ["F", "C"],
-        "type": "string"
-      },
-      "V0.Temperature": {
-        "properties": {
-          "units": {
-            "$ref": "#/components/schemas/TemperatureUnits"
-          },
-          "max": {
-            "type": "number",
-            "format": "double"
-          },
-          "min": {
-            "type": "number",
-            "format": "double"
-          }
-        },
-        "required": ["units"],
+        "required": [
+          "stops"
+        ],
         "type": "object"
       },
       "StrategyLiveEquipment": {
         "properties": {
           "temperature": {
-            "$ref": "#/components/schemas/V0.Temperature"
+            "$ref": "#/components/schemas/Temperature"
           },
           "length": {
-            "$ref": "#/components/schemas/V0.Dimension"
+            "$ref": "#/components/schemas/Dimension"
           },
           "type": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/V0.EquipmentType"
+                "$ref": "#/components/schemas/EquipmentType"
               },
               {
                 "type": "string"
@@ -1927,19 +2291,9 @@
             ]
           }
         },
-        "required": ["type"],
-        "type": "object"
-      },
-      "V0.FreightModeDetails": {
-        "properties": {
-          "drayageSubtype": {
-            "$ref": "#/components/schemas/DrayageSubtype"
-          },
-          "mode": {
-            "$ref": "#/components/schemas/FreightMode"
-          }
-        },
-        "required": ["mode"],
+        "required": [
+          "type"
+        ],
         "type": "object"
       },
       "V0.Accessorial": {
@@ -1952,28 +2306,29 @@
         "type": "object",
         "additionalProperties": false
       },
-      "V0.CurrencyUnits": {
-        "properties": {},
-        "type": "object",
-        "additionalProperties": false
-      },
       "StrategyLiveAmount": {
         "properties": {
           "units": {
-            "$ref": "#/components/schemas/V0.CurrencyUnits"
+            "$ref": "#/components/schemas/CurrencyUnits"
           },
           "value": {
             "type": "number",
             "format": "double"
           }
         },
-        "required": ["units", "value"],
+        "required": [
+          "units",
+          "value"
+        ],
         "type": "object"
       },
-      "V0.LineItemType": {
-        "properties": {},
-        "type": "object",
-        "additionalProperties": false
+      "LineItemType": {
+        "enum": [
+          "FREIGHT_FLAT",
+          "FUEL_FLAT",
+          "OTHER"
+        ],
+        "type": "string"
       },
       "StrategyLiveLineItem": {
         "properties": {
@@ -1986,7 +2341,7 @@
           "type": {
             "anyOf": [
               {
-                "$ref": "#/components/schemas/V0.LineItemType"
+                "$ref": "#/components/schemas/LineItemType"
               },
               {
                 "type": "string"
@@ -1994,7 +2349,10 @@
             ]
           }
         },
-        "required": ["amount", "description"],
+        "required": [
+          "amount",
+          "description"
+        ],
         "type": "object"
       },
       "Record_string.string_": {
@@ -2051,11 +2409,11 @@
                 "type": "array"
               },
               "freightMode": {
-                "$ref": "#/components/schemas/V0.FreightModeDetails"
+                "$ref": "#/components/schemas/FreightModeDetails"
               },
               "references": {
                 "items": {
-                  "$ref": "#/components/schemas/V0.Reference"
+                  "$ref": "#/components/schemas/Reference"
                 },
                 "type": "array"
               },
@@ -2072,25 +2430,14 @@
                 "$ref": "#/components/schemas/StrategyLiveRoute"
               }
             },
-            "required": ["commodities", "equipment", "route"],
+            "required": [
+              "commodities",
+              "equipment",
+              "route"
+            ],
             "type": "object"
           }
         ]
-      },
-      "V0.User": {
-        "properties": {
-          "externalIds": {
-            "items": {
-              "$ref": "#/components/schemas/UserExternalIdentifier"
-            },
-            "type": "array"
-          },
-          "id": {
-            "type": "string"
-          }
-        },
-        "required": ["externalIds", "id"],
-        "type": "object"
       },
       "StrategyLiveOrder": {
         "properties": {
@@ -2102,7 +2449,7 @@
           },
           "users": {
             "items": {
-              "$ref": "#/components/schemas/V0.User"
+              "$ref": "#/components/schemas/User"
             },
             "type": "array"
           },
@@ -2121,7 +2468,12 @@
             "type": "string"
           }
         },
-        "required": ["freightOrder", "updatedAt", "createdAt", "id"],
+        "required": [
+          "freightOrder",
+          "updatedAt",
+          "createdAt",
+          "id"
+        ],
         "type": "object"
       },
       "GetOrderPayload": {
@@ -2130,7 +2482,9 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": ["order"],
+        "required": [
+          "order"
+        ],
         "type": "object"
       },
       "CreateOrderPayload": {
@@ -2139,7 +2493,9 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": ["order"],
+        "required": [
+          "order"
+        ],
         "type": "object"
       },
       "Pick_StrategyLiveOrder.Exclude_keyofStrategyLiveOrder.id__": {
@@ -2157,7 +2513,7 @@
           },
           "users": {
             "items": {
-              "$ref": "#/components/schemas/V0.User"
+              "$ref": "#/components/schemas/User"
             },
             "type": "array"
           },
@@ -2168,7 +2524,11 @@
             "type": "string"
           }
         },
-        "required": ["createdAt", "updatedAt", "freightOrder"],
+        "required": [
+          "createdAt",
+          "updatedAt",
+          "freightOrder"
+        ],
         "type": "object",
         "description": "From T, pick a set of properties whose keys are in the union K"
       },
@@ -2185,7 +2545,9 @@
             "$ref": "#/components/schemas/StrategyLiveOrder"
           }
         },
-        "required": ["order"],
+        "required": [
+          "order"
+        ],
         "type": "object"
       },
       "UpdateOrderInput": {
@@ -2197,7 +2559,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"],
+        "required": [
+          "success"
+        ],
         "type": "object"
       },
       "AttachDocumentPayload": {
@@ -2206,7 +2570,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"],
+        "required": [
+          "success"
+        ],
         "type": "object"
       },
       "AttachDocumentInput": {
@@ -2224,7 +2590,12 @@
             "type": "string"
           }
         },
-        "required": ["documentType", "mimetype", "filename", "file"],
+        "required": [
+          "documentType",
+          "mimetype",
+          "filename",
+          "file"
+        ],
         "type": "object"
       },
       "TurvoCreateOrUpdateLocationPayload": {
@@ -2233,12 +2604,17 @@
             "type": "boolean"
           }
         },
-        "required": ["success"],
+        "required": [
+          "success"
+        ],
         "type": "object"
       },
       "TurvoLocationEventName": {
         "type": "string",
-        "enum": ["LOCATION_ADD", "LOCATION_UPDATE"]
+        "enum": [
+          "LOCATION_ADD",
+          "LOCATION_UPDATE"
+        ]
       },
       "TurvoLocationAddress": {
         "properties": {
@@ -2263,7 +2639,10 @@
                 "format": "double"
               }
             },
-            "required": ["value", "key"],
+            "required": [
+              "value",
+              "key"
+            ],
             "type": "object"
           },
           "isPrimary": {
@@ -2291,7 +2670,14 @@
             "type": "string"
           }
         },
-        "required": ["country", "zip", "state", "city", "line1", "id"],
+        "required": [
+          "country",
+          "zip",
+          "state",
+          "city",
+          "line1",
+          "id"
+        ],
         "type": "object"
       },
       "TurvoLatLng": {
@@ -2305,7 +2691,10 @@
             "format": "double"
           }
         },
-        "required": ["lon", "lat"],
+        "required": [
+          "lon",
+          "lat"
+        ],
         "type": "object"
       },
       "TurvoGeofence": {
@@ -2321,7 +2710,10 @@
                     "type": "string"
                   }
                 },
-                "required": ["value", "key"],
+                "required": [
+                  "value",
+                  "key"
+                ],
                 "type": "object"
               },
               "polygon": {
@@ -2335,14 +2727,20 @@
                 "format": "double"
               }
             },
-            "required": ["units", "value"],
+            "required": [
+              "units",
+              "value"
+            ],
             "type": "object"
           },
           "type": {
             "type": "string"
           }
         },
-        "required": ["radius", "type"],
+        "required": [
+          "radius",
+          "type"
+        ],
         "type": "object"
       },
       "TurvoEmail": {
@@ -2375,7 +2773,10 @@
             "type": "string"
           }
         },
-        "required": ["id", "email"],
+        "required": [
+          "id",
+          "email"
+        ],
         "type": "object"
       },
       "TurvoHoursOfOperation": {
@@ -2428,7 +2829,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object"
       },
       "TurvoSchedulingType": {
@@ -2444,7 +2847,9 @@
             "type": "string"
           }
         },
-        "required": ["id"],
+        "required": [
+          "id"
+        ],
         "type": "object"
       },
       "TurvoLocationWebhookPayload": {
@@ -2489,7 +2894,9 @@
               },
               {
                 "type": "string",
-                "enum": [""]
+                "enum": [
+                  ""
+                ]
               }
             ]
           },
@@ -2500,7 +2907,9 @@
               },
               {
                 "type": "string",
-                "enum": [""]
+                "enum": [
+                  ""
+                ]
               }
             ]
           },
@@ -2518,7 +2927,12 @@
             "format": "double"
           }
         },
-        "required": ["timezone", "address", "name", "id"],
+        "required": [
+          "timezone",
+          "address",
+          "name",
+          "id"
+        ],
         "type": "object"
       },
       "TurvoWebhookRequest_TurvoLocationWebhookPayload.TurvoLocationEventName_": {
@@ -2536,7 +2950,12 @@
             "type": "string"
           }
         },
-        "required": ["eventPayload", "eventTime", "eventName", "tenantId"],
+        "required": [
+          "eventPayload",
+          "eventTime",
+          "eventName",
+          "tenantId"
+        ],
         "type": "object"
       },
       "TurvoCreateOrUpdateLocationInput": {
@@ -2554,7 +2973,9 @@
             "type": "boolean"
           }
         },
-        "required": ["success"],
+        "required": [
+          "success"
+        ],
         "type": "object"
       },
       "GetCustomerPayload": {
@@ -2563,7 +2984,9 @@
             "$ref": "#/components/schemas/Customer"
           }
         },
-        "required": ["customer"],
+        "required": [
+          "customer"
+        ],
         "type": "object"
       },
       "CreateCustomerInput": {
@@ -2572,7 +2995,9 @@
             "$ref": "#/components/schemas/CustomerData"
           }
         },
-        "required": ["customer"],
+        "required": [
+          "customer"
+        ],
         "type": "object"
       },
       "UpdateCustomerInput": {
@@ -2581,7 +3006,9 @@
             "$ref": "#/components/schemas/CustomerData"
           }
         },
-        "required": ["customer"],
+        "required": [
+          "customer"
+        ],
         "type": "object"
       },
       "GetLocationPayload": {
@@ -2590,7 +3017,9 @@
             "$ref": "#/components/schemas/Location"
           }
         },
-        "required": ["location"],
+        "required": [
+          "location"
+        ],
         "type": "object"
       },
       "CreateLocationInput": {
@@ -2599,7 +3028,9 @@
             "$ref": "#/components/schemas/LocationData"
           }
         },
-        "required": ["location"],
+        "required": [
+          "location"
+        ],
         "type": "object"
       },
       "UpdateLocationInput": {
@@ -2608,7 +3039,9 @@
             "$ref": "#/components/schemas/LocationData"
           }
         },
-        "required": ["location"],
+        "required": [
+          "location"
+        ],
         "type": "object"
       },
       "LocationCreatedEvent": {
@@ -2618,11 +3051,16 @@
           },
           "event": {
             "type": "string",
-            "enum": ["location.created"],
+            "enum": [
+              "location.created"
+            ],
             "nullable": false
           }
         },
-        "required": ["location", "event"],
+        "required": [
+          "location",
+          "event"
+        ],
         "type": "object"
       },
       "LocationUpdatedEvent": {
@@ -2632,11 +3070,16 @@
           },
           "event": {
             "type": "string",
-            "enum": ["location.updated"],
+            "enum": [
+              "location.updated"
+            ],
             "nullable": false
           }
         },
-        "required": ["location", "event"],
+        "required": [
+          "location",
+          "event"
+        ],
         "type": "object"
       },
       "CustomerCreatedEvent": {
@@ -2646,11 +3089,16 @@
           },
           "event": {
             "type": "string",
-            "enum": ["customer.created"],
+            "enum": [
+              "customer.created"
+            ],
             "nullable": false
           }
         },
-        "required": ["customer", "event"],
+        "required": [
+          "customer",
+          "event"
+        ],
         "type": "object"
       },
       "CustomerUpdatedEvent": {
@@ -2660,11 +3108,1067 @@
           },
           "event": {
             "type": "string",
-            "enum": ["customer.updated"],
+            "enum": [
+              "customer.updated"
+            ],
             "nullable": false
           }
         },
-        "required": ["customer", "event"],
+        "required": [
+          "customer",
+          "event"
+        ],
+        "type": "object"
+      },
+      "MovementExternalIdentifierType": {
+        "enum": [
+          "CUSTOM"
+        ],
+        "type": "string"
+      },
+      "MovementExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/MovementExternalIdentifierType"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ExternalIdentifierType": {
+        "enum": [
+          "CUSTOM"
+        ],
+        "type": "string"
+      },
+      "ExternalIdentifier": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/ExternalIdentifierType"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "value": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "value"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "Tarping": {
+        "properties": {
+          "size": {
+            "$ref": "#/components/schemas/Dimension"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "TARPING"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "size",
+          "type"
+        ],
+        "type": "object"
+      },
+      "Liftgate": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIFTGATE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "HeadacheRack": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "HEADACHE_RACK"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "CoilRack": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "COIL_RACK"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "PipeStakes": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PIPE_STAKES"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Gps": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "GPS"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "OverDimension": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "OVER_DIMENSION"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "BlindShipment": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "BLIND_SHIPMENT"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "DriverAssistance": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DRIVER_ASSISTANCE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Scale": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "SCALE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Straps": {
+        "properties": {
+          "numberRequired": {
+            "type": "number",
+            "format": "double"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "STRAPS"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Team": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "TEAM"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Transloading": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "TRANSLOADING"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Ppe": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PPE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "ChainsAndBinders": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "CHAINS_AND_BINDERS"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Dunnage": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "DUNNAGE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "FoodGrade": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "FOOD_GRADE"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Twic": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "TWIC"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "LimitedAccess": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "LIMITED_ACCESS"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "InsidePickup": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "INSIDE_PICKUP"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "InsideDelivery": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "INSIDE_DELIVERY"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Permit": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "PERMIT"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "Other": {
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "OTHER"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "description",
+          "type"
+        ],
+        "type": "object"
+      },
+      "Accessorial": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/Tarping"
+          },
+          {
+            "$ref": "#/components/schemas/Liftgate"
+          },
+          {
+            "$ref": "#/components/schemas/HeadacheRack"
+          },
+          {
+            "$ref": "#/components/schemas/CoilRack"
+          },
+          {
+            "$ref": "#/components/schemas/PipeStakes"
+          },
+          {
+            "$ref": "#/components/schemas/Gps"
+          },
+          {
+            "$ref": "#/components/schemas/OverDimension"
+          },
+          {
+            "$ref": "#/components/schemas/BlindShipment"
+          },
+          {
+            "$ref": "#/components/schemas/DriverAssistance"
+          },
+          {
+            "$ref": "#/components/schemas/Scale"
+          },
+          {
+            "$ref": "#/components/schemas/Straps"
+          },
+          {
+            "$ref": "#/components/schemas/Team"
+          },
+          {
+            "$ref": "#/components/schemas/Transloading"
+          },
+          {
+            "$ref": "#/components/schemas/Ppe"
+          },
+          {
+            "$ref": "#/components/schemas/ChainsAndBinders"
+          },
+          {
+            "$ref": "#/components/schemas/Dunnage"
+          },
+          {
+            "$ref": "#/components/schemas/FoodGrade"
+          },
+          {
+            "$ref": "#/components/schemas/Twic"
+          },
+          {
+            "$ref": "#/components/schemas/LimitedAccess"
+          },
+          {
+            "$ref": "#/components/schemas/InsidePickup"
+          },
+          {
+            "$ref": "#/components/schemas/InsideDelivery"
+          },
+          {
+            "$ref": "#/components/schemas/Permit"
+          },
+          {
+            "$ref": "#/components/schemas/Other"
+          }
+        ]
+      },
+      "MovementStopData": {
+        "properties": {
+          "externalNotes": {
+            "type": "string"
+          },
+          "internalNotes": {
+            "type": "string"
+          },
+          "accessorials": {
+            "items": {
+              "$ref": "#/components/schemas/Accessorial"
+            },
+            "type": "array"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "commodities": {
+            "items": {
+              "$ref": "#/components/schemas/Commodity"
+            },
+            "type": "array"
+          },
+          "weight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "notes": {
+            "type": "string"
+          },
+          "dateTimeRanges": {
+            "items": {
+              "$ref": "#/components/schemas/DateTimeRange"
+            },
+            "type": "array"
+          },
+          "location": {
+            "$ref": "#/components/schemas/Location"
+          },
+          "type": {
+            "$ref": "#/components/schemas/StopType"
+          },
+          "stopReferences": {
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            },
+            "type": "array"
+          },
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/ExternalIdentifier"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "location",
+          "type",
+          "stopReferences",
+          "externalIds"
+        ],
+        "type": "object"
+      },
+      "MayHaveID_MovementStopData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MovementStopData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "MovementStop": {
+        "$ref": "#/components/schemas/MayHaveID_MovementStopData_"
+      },
+      "MovementRoute": {
+        "properties": {
+          "stops": {
+            "items": {
+              "$ref": "#/components/schemas/MovementStop"
+            },
+            "type": "array"
+          },
+          "mileage": {
+            "$ref": "#/components/schemas/Mileage"
+          }
+        },
+        "required": [
+          "stops"
+        ],
+        "type": "object"
+      },
+      "Cargo": {
+        "properties": {
+          "declaredValue": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "dimensions": {
+            "$ref": "#/components/schemas/Dimensions"
+          },
+          "totalWeight": {
+            "$ref": "#/components/schemas/Weight"
+          },
+          "commodities": {
+            "items": {
+              "$ref": "#/components/schemas/Commodity"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "commodities"
+        ],
+        "type": "object"
+      },
+      "PaymentTerms": {
+        "enum": [
+          "PREPAID",
+          "COLLECT",
+          "THIRD_PARTY"
+        ],
+        "type": "string"
+      },
+      "LineItem": {
+        "properties": {
+          "type": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/LineItemType"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Typically one of the LineItemType enum values but subject to change"
+          },
+          "description": {
+            "type": "string"
+          },
+          "amount": {
+            "$ref": "#/components/schemas/Amount"
+          }
+        },
+        "required": [
+          "description",
+          "amount"
+        ],
+        "type": "object",
+        "additionalProperties": false
+      },
+      "ChargesToCustomer": {
+        "properties": {
+          "lineItems": {
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "lineItems"
+        ],
+        "type": "object"
+      },
+      "Costs": {
+        "properties": {
+          "lineItems": {
+            "items": {
+              "$ref": "#/components/schemas/LineItem"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "lineItems"
+        ],
+        "type": "object"
+      },
+      "CostNegotiationGuidance": {
+        "properties": {
+          "maxPrice": {
+            "$ref": "#/components/schemas/Amount"
+          },
+          "startingPrice": {
+            "$ref": "#/components/schemas/Amount"
+          }
+        },
+        "required": [
+          "maxPrice",
+          "startingPrice"
+        ],
+        "type": "object"
+      },
+      "Financials": {
+        "properties": {
+          "costNegotiationGuidance": {
+            "$ref": "#/components/schemas/CostNegotiationGuidance"
+          },
+          "costs": {
+            "$ref": "#/components/schemas/Costs"
+          },
+          "chargesToCustomer": {
+            "$ref": "#/components/schemas/ChargesToCustomer"
+          },
+          "paymentTerms": {
+            "$ref": "#/components/schemas/PaymentTerms"
+          }
+        },
+        "required": [
+          "costs",
+          "chargesToCustomer",
+          "paymentTerms"
+        ],
+        "type": "object"
+      },
+      "CarrierContact": {
+        "properties": {
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "DRIVER",
+              "DISPATCH"
+            ]
+          }
+        },
+        "required": [
+          "contact",
+          "type"
+        ],
+        "type": "object"
+      },
+      "CarrierEquipment": {
+        "properties": {
+          "trailerNumber": {
+            "type": "string"
+          },
+          "truckNumber": {
+            "type": "string"
+          },
+          "equipment": {
+            "$ref": "#/components/schemas/Equipment"
+          }
+        },
+        "required": [
+          "equipment"
+        ],
+        "type": "object"
+      },
+      "CarrierData": {
+        "properties": {
+          "equipment": {
+            "items": {
+              "$ref": "#/components/schemas/CarrierEquipment"
+            },
+            "type": "array"
+          },
+          "contacts": {
+            "items": {
+              "$ref": "#/components/schemas/CarrierContact"
+            },
+            "type": "array"
+          },
+          "dotNumber": {
+            "type": "string"
+          },
+          "mcNumber": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "MayHaveID_CarrierData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CarrierData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          }
+        ]
+      },
+      "Carrier": {
+        "$ref": "#/components/schemas/MayHaveID_CarrierData_"
+      },
+      "AssignedCarrier": {
+        "properties": {
+          "assignedDispatch": {
+            "$ref": "#/components/schemas/CarrierContact"
+          },
+          "assignedDriver": {
+            "$ref": "#/components/schemas/CarrierContact"
+          },
+          "assignedEquipment": {
+            "items": {
+              "$ref": "#/components/schemas/CarrierEquipment"
+            },
+            "type": "array"
+          },
+          "carrier": {
+            "$ref": "#/components/schemas/Carrier"
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "type": "object"
+      },
+      "MovementData": {
+        "properties": {
+          "attributes": {
+            "$ref": "#/components/schemas/Record_string.string_"
+          },
+          "tags": {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "externalNotes": {
+            "type": "string"
+          },
+          "internalNotes": {
+            "type": "string"
+          },
+          "carrier": {
+            "$ref": "#/components/schemas/AssignedCarrier"
+          },
+          "financials": {
+            "$ref": "#/components/schemas/Financials"
+          },
+          "cargo": {
+            "$ref": "#/components/schemas/Cargo"
+          },
+          "accessorials": {
+            "items": {
+              "$ref": "#/components/schemas/Accessorial"
+            },
+            "type": "array"
+          },
+          "equipmentOptions": {
+            "items": {
+              "$ref": "#/components/schemas/Equipment"
+            },
+            "type": "array"
+          },
+          "customer": {
+            "$ref": "#/components/schemas/Customer"
+          },
+          "route": {
+            "$ref": "#/components/schemas/MovementRoute"
+          },
+          "freightModeDetails": {
+            "$ref": "#/components/schemas/FreightModeDetails"
+          },
+          "references": {
+            "items": {
+              "$ref": "#/components/schemas/Reference"
+            },
+            "type": "array"
+          },
+          "responsibleUser": {
+            "$ref": "#/components/schemas/User"
+          },
+          "externalIds": {
+            "items": {
+              "$ref": "#/components/schemas/MovementExternalIdentifier"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "cargo",
+          "equipmentOptions",
+          "customer",
+          "route",
+          "freightModeDetails",
+          "references",
+          "externalIds"
+        ],
+        "type": "object"
+      },
+      "WithId_MovementData_": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/MovementData"
+          },
+          {
+            "properties": {
+              "id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id"
+            ],
+            "type": "object"
+          }
+        ]
+      },
+      "Movement": {
+        "$ref": "#/components/schemas/WithId_MovementData_"
+      },
+      "GetMovementPayload": {
+        "properties": {
+          "movement": {
+            "$ref": "#/components/schemas/Movement"
+          }
+        },
+        "required": [
+          "movement"
+        ],
+        "type": "object"
+      },
+      "CreateMovementInput": {
+        "properties": {
+          "movement": {
+            "$ref": "#/components/schemas/MovementData"
+          }
+        },
+        "required": [
+          "movement"
+        ],
+        "type": "object"
+      },
+      "UpdateMovementInput": {
+        "properties": {
+          "movement": {
+            "$ref": "#/components/schemas/MovementData"
+          }
+        },
+        "required": [
+          "movement"
+        ],
+        "type": "object"
+      },
+      "GetCarrierPayload": {
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/Carrier"
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "type": "object"
+      },
+      "CreateCarrierInput": {
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/CarrierData"
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "type": "object"
+      },
+      "UpdateCarrierInput": {
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/CarrierData"
+          }
+        },
+        "required": [
+          "carrier"
+        ],
+        "type": "object"
+      },
+      "CarrierCreatedEvent": {
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/Carrier"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "carrier.created"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "carrier",
+          "event"
+        ],
+        "type": "object"
+      },
+      "CarrierUpdatedEvent": {
+        "properties": {
+          "carrier": {
+            "$ref": "#/components/schemas/Carrier"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "carrier.updated"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "carrier",
+          "event"
+        ],
+        "type": "object"
+      },
+      "MovementCreatedEvent": {
+        "properties": {
+          "movement": {
+            "$ref": "#/components/schemas/Movement"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "movement.created"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "movement",
+          "event"
+        ],
+        "type": "object"
+      },
+      "MovementUpdatedEvent": {
+        "properties": {
+          "movement": {
+            "$ref": "#/components/schemas/Movement"
+          },
+          "event": {
+            "type": "string",
+            "enum": [
+              "movement.updated"
+            ],
+            "nullable": false
+          }
+        },
+        "required": [
+          "movement",
+          "event"
+        ],
         "type": "object"
       }
     },
@@ -2709,7 +4213,9 @@
             }
           }
         },
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "security": [
           {
             "basic": []
@@ -2743,7 +4249,9 @@
             }
           }
         },
-        "tags": ["Quotes"],
+        "tags": [
+          "Quotes"
+        ],
         "security": [
           {
             "basic": []
@@ -2776,7 +4284,9 @@
             }
           }
         },
-        "tags": ["Customers"],
+        "tags": [
+          "Customers"
+        ],
         "security": [
           {
             "basic": []
@@ -2807,7 +4317,9 @@
             }
           }
         },
-        "tags": ["Customers"],
+        "tags": [
+          "Customers"
+        ],
         "security": [
           {
             "basic": []
@@ -2850,7 +4362,9 @@
             }
           }
         },
-        "tags": ["Customers"],
+        "tags": [
+          "Customers"
+        ],
         "security": [
           {
             "basic": []
@@ -2884,7 +4398,9 @@
             }
           }
         },
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "security": [
           {
             "basic": []
@@ -2915,7 +4431,9 @@
             }
           }
         },
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "security": [
           {
             "basic": []
@@ -2958,7 +4476,9 @@
             }
           }
         },
-        "tags": ["Locations"],
+        "tags": [
+          "Locations"
+        ],
         "security": [
           {
             "basic": []
@@ -3080,6 +4600,338 @@
           }
         }
       }
+    },
+    "/movements/{movementId}": {
+      "get": {
+        "operationId": "GetMovement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetMovementPayload"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Movements"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "movementId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "UpdateMovement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movement"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Movements"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "movementId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMovementInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movements": {
+      "post": {
+        "operationId": "CreateMovement",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Movement"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Movements"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMovementInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carriers/{carrierId}": {
+      "get": {
+        "operationId": "GetCarrier",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetCarrierPayload"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Carriers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "carrierId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      },
+      "put": {
+        "operationId": "UpdateCarrier",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrier"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Carriers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "carrierId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCarrierInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carriers": {
+      "post": {
+        "operationId": "CreateCarrier",
+        "responses": {
+          "200": {
+            "description": "Ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Carrier"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Carriers"
+        ],
+        "security": [
+          {
+            "basic": []
+          }
+        ],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCarrierInput"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/carriers/on-created": {
+      "post": {
+        "operationId": "OnCarrierCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a carrier is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarrierCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/carriers/on-updated": {
+      "post": {
+        "operationId": "OnCarrierUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a carrier is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarrierUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/movements/on-created": {
+      "post": {
+        "operationId": "OnMovementCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a movement is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovementCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/webhooks/movements/on-updated": {
+      "post": {
+        "operationId": "OnMovementUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a movement is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovementUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "servers": [
@@ -3186,6 +5038,110 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CustomerUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carriers/on-created": {
+      "post": {
+        "operationId": "OnCarrierCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a carrier is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarrierCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carriers/on-updated": {
+      "post": {
+        "operationId": "OnCarrierUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a carrier is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CarrierUpdatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movements/on-created": {
+      "post": {
+        "operationId": "OnMovementCreated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a movement is created.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovementCreatedEvent"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/movements/on-updated": {
+      "post": {
+        "operationId": "OnMovementUpdated",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No content"
+          }
+        },
+        "description": "Sent by Vooma to your server when a movement is updated.",
+        "security": [],
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MovementUpdatedEvent"
               }
             }
           }
