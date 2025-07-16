@@ -3,3 +3,24 @@ title: "Vooma Schedule"
 description: "Better, cheaper, faster appointments... without lifting a finger"
 icon: "calendar"
 ---
+
+import BetaBanner from "/snippets/beta-banner.mdx";
+
+<BetaBanner />
+
+import MovementSync from "/snippets/integration-requirements/movement-sync.mdx";
+
+## Partnered TMS
+
+If you use one of our partnered TMS platforms, Vooma Schedule will work out-of-the-box.
+
+## Custom Integration
+
+<AccordionGroup>
+  <Accordion title="Set up Movement sync">
+    <MovementSync />
+  </Accordion>
+  <Accordion title="Receive webhooks on scheduling events">
+    Implement endpoints to handle asynchronous appointment scheduling events.
+  </Accordion>
+</AccordionGroup>

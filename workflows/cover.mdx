@@ -3,3 +3,21 @@ title: "Vooma Cover"
 description: "Communicate with carriers, negotiate rates, book loads"
 icon: "truck"
 ---
+
+import MovementSync from "/snippets/integration-requirements/movement-sync.mdx";
+
+## Partnered TMS
+
+If you use one of our partnered TMS platforms, Vooma Cover will work largely out-of-the-box.
+
+## Custom Integration
+
+<AccordionGroup>
+  <Accordion title="Set up Movement sync">
+    <MovementSync />
+  </Accordion>
+  <Accordion title="Receive webhooks on scheduling events">
+    Implement endpoints to handle load coverage events, such as the creation of
+    a new carrier offer and the assignment of a carrier to a movement.
+  </Accordion>
+</AccordionGroup>

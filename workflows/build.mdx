@@ -9,7 +9,7 @@ import LocationSync from "/snippets/integration-requirements/location-sync.mdx";
 
 ## Partnered TMS
 
-If you use one of our partnered TMS platforms, Vooma build will work out-of-the-box.
+If you use one of our partnered TMS platforms, Vooma Build will work out-of-the-box.
 
 ## Custom Integration
 
@@ -20,8 +20,9 @@ If you use one of our partnered TMS platforms, Vooma build will work out-of-the-
   <Accordion title="Set up bidirectional Location sync">
     <LocationSync />
   </Accordion>
-  <Accordion title="Receive webhooks on Movement creation or update">
-    Implement an endpoint that handles the [Create or Update
-    Movement](/api-reference/movements/onCreateOrUpdate) webhook
+  <Accordion title="Receive webhooks on Movement creation and update">
+    Implement endpoints to handle [On Movement
+    Created](/api-reference/movements/onCreate) and [On Movement
+    Updated](/api-reference/movements/onUpdate) events.
   </Accordion>
 </AccordionGroup>
