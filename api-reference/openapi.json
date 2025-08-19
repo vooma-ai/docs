@@ -2117,8 +2117,26 @@
         "properties": {
           "confirmationNumber": {
             "type": "string"
+          },
+          "confirmedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "requestedDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stopIndex": {
+            "type": "number",
+            "format": "double"
+          },
+          "movementid": {
+            "type": "string"
           }
         },
+        "required": [
+          "stopIndex"
+        ],
         "type": "object"
       },
       "MayHaveID_AppointmentData_": {

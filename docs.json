@@ -52,7 +52,10 @@
           },
           {
             "group": "Quotes",
-            "pages": ["api-reference/quotes/get", "api-reference/quotes/search"]
+            "pages": [
+              "api-reference/quotes/get",
+              "api-reference/quotes/search"
+            ]
           },
           {
             "group": "Movements",
@@ -93,6 +96,12 @@
               "api-reference/locations/update",
               "api-reference/locations/onCreate",
               "api-reference/locations/onUpdate"
+            ]
+          },
+          {
+            "group": "Appointments",
+            "pages": [
+              "api-reference/appointments/onUpdate"
             ]
           }
         ]
