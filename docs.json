@@ -60,6 +60,7 @@
               "api-reference/movements/get",
               "api-reference/movements/create",
               "api-reference/movements/update",
+              "api-reference/movements/schedule",
               "api-reference/movements/onCreate",
               "api-reference/movements/onUpdate"
             ]
