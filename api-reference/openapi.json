@@ -2042,7 +2042,6 @@
           "equipmentOptions",
           "customer",
           "route",
-          "freightModeDetails",
           "references",
           "externalIds"
         ],
